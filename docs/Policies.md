@@ -22,7 +22,7 @@ following content:
 namespace App\Policy;
 
 use App\Model\Entity\Article;
-use Authorization\IdentityInterface;
+use Phauthentic\Authorization\IdentityInterface;
 
 class ArticlePolicy
 {
@@ -82,7 +82,7 @@ in your policy:
 ```php
 namespace App\Policy;
 
-use Authorization\Policy\BeforePolicyInterface;
+use Phauthentic\Authorization\Policy\BeforePolicyInterface;
 
 class ArticlesPolicy implements BeforePolicyInterface
 {

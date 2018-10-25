@@ -12,15 +12,15 @@
  * @since         1.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Authorization\Middleware;
+namespace Phauthentic\Authorization\Middleware;
 
-use Authorization\AuthorizationServiceInterface;
-use Authorization\AuthorizationServiceProviderInterface;
-use Authorization\Exception\AuthorizationRequiredException;
-use Authorization\Exception\Exception;
-use Authorization\IdentityDecorator;
-use Authorization\IdentityInterface;
-use Authorization\Middleware\UnauthorizedHandler\HandlerFactory;
+use Phauthentic\Authorization\AuthorizationServiceInterface;
+use Phauthentic\Authorization\AuthorizationServiceProviderInterface;
+use Phauthentic\Authorization\Exception\AuthorizationRequiredException;
+use Phauthentic\Authorization\Exception\Exception;
+use Phauthentic\Authorization\IdentityDecorator;
+use Phauthentic\Authorization\IdentityInterface;
+use Phauthentic\Authorization\Middleware\UnauthorizedHandler\HandlerFactory;
 use Cake\Core\InstanceConfigTrait;
 use InvalidArgumentException;
 use Psr\Http\Message\ResponseInterface;
@@ -60,14 +60,14 @@ class AuthorizationMiddleware
     /**
      * Authorization service or application instance.
      *
-     * @var \Authorization\AuthorizationServiceInterface|\Authorization\AuthorizationServiceProviderInterface
+     * @var \Phauthentic\Authorization\AuthorizationServiceInterface|\Authorization\AuthorizationServiceProviderInterface
      */
     protected $subject;
 
     /**
      * Constructor.
      *
-     * @param \Authorization\AuthorizationServiceInterface|\Authorization\AuthorizationServiceProviderInterface $subject Authorization service or provider instance.
+     * @param \Phauthentic\Authorization\AuthorizationServiceInterface|\Authorization\AuthorizationServiceProviderInterface $subject Authorization service or provider instance.
      * @param array $config Config array.
      * @throws \InvalidArgumentException
      */
@@ -125,7 +125,7 @@ class AuthorizationMiddleware
     /**
      * Returns unauthorized handler.
      *
-     * @return \Authorization\Middleware\UnauthorizedHandler\HandlerInterface
+     * @return \Phauthentic\Authorization\Middleware\UnauthorizedHandler\HandlerInterface
      */
     protected function getHandler()
     {
@@ -147,7 +147,7 @@ class AuthorizationMiddleware
      *
      * @param \Psr\Http\Message\ServerRequestInterface $request Server request.
      * @param \Psr\Http\Message\ResponseInterface $response Response.
-     * @return \Authorization\AuthorizationServiceInterface
+     * @return \Phauthentic\Authorization\AuthorizationServiceInterface
      * @throws \RuntimeException When authorization method has not been defined.
      */
     protected function getAuthorizationService($request, $response)
@@ -171,9 +171,9 @@ class AuthorizationMiddleware
     /**
      * Builds the identity object.
      *
-     * @param \Authorization\AuthorizationServiceInterface $service Authorization service.
+     * @param \Phauthentic\Authorization\AuthorizationServiceInterface $service Authorization service.
      * @param \ArrayAccess|array $identity Identity data
-     * @return \Authorization\IdentityInterface
+     * @return \Phauthentic\Authorization\IdentityInterface
      */
     protected function buildIdentity(AuthorizationServiceInterface $service, $identity)
     {

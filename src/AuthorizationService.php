@@ -12,11 +12,11 @@
  * @since         1.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Authorization;
+namespace Phauthentic\Authorization;
 
-use Authorization\Policy\BeforePolicyInterface;
-use Authorization\Policy\Exception\MissingMethodException;
-use Authorization\Policy\ResolverInterface;
+use Phauthentic\Authorization\Policy\BeforePolicyInterface;
+use Phauthentic\Authorization\Policy\Exception\MissingMethodException;
+use Phauthentic\Authorization\Policy\ResolverInterface;
 use RuntimeException;
 
 class AuthorizationService implements AuthorizationServiceInterface
@@ -24,7 +24,7 @@ class AuthorizationService implements AuthorizationServiceInterface
     /**
      * Authorization policy resolver.
      *
-     * @var \Authorization\Policy\ResolverInterface
+     * @var \Phauthentic\Authorization\Policy\ResolverInterface
      */
     protected $resolver;
 
@@ -36,8 +36,9 @@ class AuthorizationService implements AuthorizationServiceInterface
     protected $authorizationChecked = false;
 
     /**
+     * Constructor
      *
-     * @param \Authorization\Policy\ResolverInterface $resolver Authorization policy resolver.
+     * @param \Phauthentic\Authorization\Policy\ResolverInterface $resolver Authorization policy resolver.
      */
     public function __construct(ResolverInterface $resolver)
     {
@@ -87,7 +88,7 @@ class AuthorizationService implements AuthorizationServiceInterface
      * @param mixed $policy Policy object.
      * @param string $action Action name.
      * @return callable
-     * @throws \Authorization\Policy\Exception\MissingMethodException
+     * @throws \Phauthentic\Authorization\Policy\Exception\MissingMethodException
      */
     protected function getCanHandler($policy, $action)
     {
@@ -106,9 +107,9 @@ class AuthorizationService implements AuthorizationServiceInterface
      * @param mixed $policy Policy object.
      * @param string $action Action name.
      * @return callable
-     * @throws \Authorization\Policy\Exception\MissingMethodException
+     * @throws \Phauthentic\Authorization\Policy\Exception\MissingMethodException
      */
-    protected function getScopeHandler($policy, $action)
+    protected function getScopeHandler($policy, $action): callable
     {
         $method = 'scope' . ucfirst($action);
 
@@ -122,7 +123,7 @@ class AuthorizationService implements AuthorizationServiceInterface
     /**
      * {@inheritDoc}
      */
-    public function authorizationChecked()
+    public function authorizationChecked(): bool
     {
         return $this->authorizationChecked;
     }
@@ -130,7 +131,7 @@ class AuthorizationService implements AuthorizationServiceInterface
     /**
      * {@inheritDoc}
      */
-    public function skipAuthorization()
+    public function skipAuthorization(): AuthorizationServiceInterface
     {
         $this->authorizationChecked = true;
 

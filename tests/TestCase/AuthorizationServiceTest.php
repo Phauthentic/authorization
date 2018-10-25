@@ -14,12 +14,12 @@
  */
 namespace Authorization\Test\TestCase;
 
-use Authorization\AuthorizationService;
-use Authorization\IdentityDecorator;
-use Authorization\Policy\BeforePolicyInterface;
-use Authorization\Policy\Exception\MissingMethodException;
-use Authorization\Policy\MapResolver;
-use Cake\TestSuite\TestCase;
+use Phauthentic\Authorization\AuthorizationService;
+use Phauthentic\Authorization\IdentityDecorator;
+use Phauthentic\Authorization\Policy\BeforePolicyInterface;
+use Phauthentic\Authorization\Policy\Exception\MissingMethodException;
+use Phauthentic\Authorization\Policy\MapResolver;
+use PHPUnit\Framework\TestCase;
 use RuntimeException;
 use TestApp\Model\Entity\Article;
 use TestApp\Policy\ArticlePolicy;

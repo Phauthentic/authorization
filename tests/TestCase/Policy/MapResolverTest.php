@@ -14,8 +14,8 @@
  */
 namespace Authorization\Test\TestCase\Policy;
 
-use Authorization\Policy\Exception\MissingPolicyException;
-use Authorization\Policy\MapResolver;
+use Phauthentic\Authorization\Policy\Exception\MissingPolicyException;
+use Phauthentic\Authorization\Policy\MapResolver;
 use Cake\TestSuite\TestCase;
 use InvalidArgumentException;
 use TestApp\Model\Entity\Article;

@@ -12,10 +12,13 @@
  * @since         1.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Authorization\Policy\Exception;
+namespace Phauthentic\Authorization\Policy\Exception;
 
-use Authorization\Exception\Exception;
+use Phauthentic\Authorization\Exception\Exception;
 
+/**
+ * MissingPolicyException
+ */
 class MissingPolicyException extends Exception
 {
     /**

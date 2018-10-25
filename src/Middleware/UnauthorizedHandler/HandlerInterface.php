@@ -12,9 +12,9 @@
  * @since         1.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Authorization\Middleware\UnauthorizedHandler;
+namespace Phauthentic\Authorization\Middleware\UnauthorizedHandler;
 
-use Authorization\Exception\Exception;
+use Phauthentic\Authorization\Exception\Exception;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -27,7 +27,7 @@ interface HandlerInterface
     /**
      * Handles the unauthorized request. The modified response should be returned.
      *
-     * @param \Authorization\Exception\Exception $exception Authorization exception thrown by the application.
+     * @param \Phauthentic\Authorization\Exception\Exception $exception Authorization exception thrown by the application.
      * @param \Psr\Http\Message\ServerRequestInterface $request Server request.
      * @param \Psr\Http\Message\ResponseInterface $response Response.
      * @param array $options Options array.

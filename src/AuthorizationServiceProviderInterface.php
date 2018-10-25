@@ -12,7 +12,7 @@
  * @since         1.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Authorization;
+namespace Phauthentic\Authorization;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -28,7 +28,7 @@ interface AuthorizationServiceProviderInterface
      *
      * @param \Psr\Http\Message\ServerRequestInterface $request Request
      * @param \Psr\Http\Message\ResponseInterface $response Response
-     * @return \Authorization\AuthorizationServiceInterface
+     * @return \Phauthentic\Authorization\AuthorizationServiceInterface
      */
-    public function getAuthorizationService(ServerRequestInterface $request, ResponseInterface $response);
+    public function getAuthorizationService(ServerRequestInterface $request, ResponseInterface $response): AuthorizationServiceInterface;
 }

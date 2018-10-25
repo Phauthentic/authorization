@@ -9,7 +9,7 @@ class ArticlePolicy
     /**
      * Create articles if you're an admin or author
      *
-     * @param \Authorization\IdentityInterface $user
+     * @param \Phauthentic\Authorization\IdentityInterface $user
      * @return bool
      */
     public function canAdd($user)
@@ -38,7 +38,7 @@ class ArticlePolicy
     /**
      * Delete only own articles or any if you're an admin
      *
-     * @param \Authorization\IdentityInterface $user
+     * @param \Phauthentic\Authorization\IdentityInterface $user
      * @param Article $article
      * @return bool
      */
@@ -54,7 +54,7 @@ class ArticlePolicy
     /**
      * Scope method for index
      *
-     * @param \Authorization\IdentityInterface $user
+     * @param \Phauthentic\Authorization\IdentityInterface $user
      * @param Article $article
      * @return bool
      */
@@ -70,7 +70,7 @@ class ArticlePolicy
      *
      * This test "null" user cases
      *
-     * @param \Authorization\IdentityInterface|null $user
+     * @param \Phauthentic\Authorization\IdentityInterface|null $user
      * @param Article $article
      * @return bool
      */

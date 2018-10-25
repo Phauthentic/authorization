@@ -1,7 +1,7 @@
 <?php
 namespace TestPlugin\Policy;
 
-use Authorization\IdentityInterface;
+use Phauthentic\Authorization\IdentityInterface;
 use TestPlugin\Model\Entity\User;
 
 /**

@@ -1,8 +1,8 @@
 <?php
 namespace TestApp;
 
-use Authorization\AuthorizationServiceInterface;
-use Authorization\IdentityDecorator;
+use Phauthentic\Authorization\AuthorizationServiceInterface;
+use Phauthentic\Authorization\IdentityDecorator;
 
 class Identity extends IdentityDecorator
 {

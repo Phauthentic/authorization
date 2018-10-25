@@ -12,9 +12,9 @@
  * @since         1.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Authorization\Policy;
+namespace Phauthentic\Authorization\Policy;
 
-use Authorization\IdentityInterface;
+use Phauthentic\Authorization\IdentityInterface;
 
 /**
  * This interface should be implemented if a policy class needs to perform a
@@ -29,7 +29,7 @@ interface BeforePolicyInterface
      * If a boolean value is returned, the action check will be skipped and pre-authorization
      * check result will be returned. In case of `null`, the action check will take place.
      *
-     * @param \Authorization\IdentityInterface|null $identity Identity object.
+     * @param \Phauthentic\Authorization\IdentityInterface|null $identity Identity object.
      * @param mixed $resource The resource being operated on.
      * @param string $action The action/operation being performed.
      * @return bool|null

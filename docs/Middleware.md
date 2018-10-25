@@ -16,10 +16,10 @@ A very simple example would be:
 ```php
 namespace App;
 
-use Authorization\AuthorizationService;
-use Authorization\AuthorizationServiceProviderInterface;
-use Authorization\Middleware\AuthorizationMiddleware;
-use Authorization\Policy\OrmResolver;
+use Phauthentic\Authorization\AuthorizationService;
+use Phauthentic\Authorization\AuthorizationServiceProviderInterface;
+use Phauthentic\Authorization\Middleware\AuthorizationMiddleware;
+use Phauthentic\Authorization\Policy\OrmResolver;
 use Cake\Http\BaseApplication;
 
 class Application extends BaseApplication implements AuthorizationServiceProviderInterface
@@ -57,8 +57,8 @@ option. First lets update our `User` class:
 ```php
 namespace App\Model\Entity;
 
-use Authorization\AuthorizationServiceInterface;
-use Authorization\IdentityInterface;
+use Phauthentic\Authorization\AuthorizationServiceInterface;
+use Phauthentic\Authorization\IdentityInterface;
 use Cake\ORM\Entity;
 
 

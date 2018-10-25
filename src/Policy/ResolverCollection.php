@@ -12,9 +12,9 @@
  * @since         1.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Authorization\Policy;
+namespace Phauthentic\Authorization\Policy;
 
-use Authorization\Policy\Exception\MissingPolicyException;
+use Phauthentic\Authorization\Policy\Exception\MissingPolicyException;
 
 /**
  * `ResolverCollection` is used for aggregating multiple resolvers when more than
@@ -44,14 +44,14 @@ class ResolverCollection implements ResolverInterface
     /**
      * Policy resolver instances.
      *
-     * @var \Authorization\Policy\ResolverInterface[]
+     * @var \Phauthentic\Authorization\Policy\ResolverInterface[]
      */
     protected $resolvers = [];
 
     /**
      * Constructor. Takes an array of policy resolver instances.
      *
-     * @param \Authorization\Policy\ResolverInterface[] $resolvers An array of policy resolver instances.
+     * @param \Phauthentic\Authorization\Policy\ResolverInterface[] $resolvers An array of policy resolver instances.
      */
     public function __construct(array $resolvers = [])
     {
@@ -63,7 +63,7 @@ class ResolverCollection implements ResolverInterface
     /**
      * Adds a resolver to the collection.
      *
-     * @param \Authorization\Policy\ResolverInterface $resolver Resolver instance.
+     * @param \Phauthentic\Authorization\Policy\ResolverInterface $resolver Resolver instance.
      * @return $this
      */
     public function add(ResolverInterface $resolver)

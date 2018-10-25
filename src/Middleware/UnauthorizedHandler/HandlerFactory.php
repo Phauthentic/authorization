@@ -12,7 +12,7 @@
  * @since         1.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Authorization\Middleware\UnauthorizedHandler;
+namespace Phauthentic\Authorization\Middleware\UnauthorizedHandler;
 
 use Cake\Core\App;
 use RuntimeException;

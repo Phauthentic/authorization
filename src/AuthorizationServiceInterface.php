@@ -12,7 +12,7 @@
  * @since         1.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Authorization;
+namespace Phauthentic\Authorization;
 
 /**
  * Interface for Authorization service
@@ -25,7 +25,7 @@ interface AuthorizationServiceInterface
      * This method is intended to allow your application to build
      * conditional logic around authorization checks.
      *
-     * @param \Authorization\IdentityInterface|null $user The user to check permissions for.
+     * @param \Phauthentic\Authorization\IdentityInterface|null $user The user to check permissions for.
      * @param string $action The action/operation being performed.
      * @param mixed $resource The resource being operated on.
      * @return bool
@@ -40,7 +40,7 @@ interface AuthorizationServiceInterface
      * use case for scopes are restricting a query to only return records
      * visible to the current user.
      *
-     * @param \Authorization\IdentityInterface|null $user The user to check permissions for.
+     * @param \Phauthentic\Authorization\IdentityInterface|null $user The user to check permissions for.
      * @param string $action The action/operation being performed.
      * @param mixed $resource The resource being operated on.
      * @return mixed The modified resource.
@@ -53,7 +53,7 @@ interface AuthorizationServiceInterface
      *
      * @return bool
      */
-    public function authorizationChecked();
+    public function authorizationChecked(): bool;
 
     /**
      * Allow for authorization to be skipped for this object.
@@ -63,5 +63,5 @@ interface AuthorizationServiceInterface
      *
      * @return $this
      */
-    public function skipAuthorization();
+    public function skipAuthorization(): AuthorizationServiceInterface;
 }

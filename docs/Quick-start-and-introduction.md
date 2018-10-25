@@ -27,10 +27,10 @@ apply the middleware. In **src/Application.php** add the following to the class
 imports:
 
 ```php
-use Authorization\AuthorizationService;
-use Authorization\AuthorizationServiceProviderInterface;
-use Authorization\Middleware\AuthorizationMiddleware;
-use Authorization\Policy\OrmResolver;
+use Phauthentic\Authorization\AuthorizationService;
+use Phauthentic\Authorization\AuthorizationServiceProviderInterface;
+use Phauthentic\Authorization\Middleware\AuthorizationMiddleware;
+use Phauthentic\Authorization\Policy\OrmResolver;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 ```

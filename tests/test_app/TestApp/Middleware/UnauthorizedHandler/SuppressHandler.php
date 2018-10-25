@@ -14,8 +14,8 @@
  */
 namespace TestApp\Middleware\UnauthorizedHandler;
 
-use Authorization\Exception\Exception;
-use Authorization\Middleware\UnauthorizedHandler\HandlerInterface;
+use Phauthentic\Authorization\Exception\Exception;
+use Phauthentic\Authorization\Middleware\UnauthorizedHandler\HandlerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 

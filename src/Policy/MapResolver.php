@@ -12,9 +12,9 @@
  * @since         1.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Authorization\Policy;
+namespace Phauthentic\Authorization\Policy;
 
-use Authorization\Policy\Exception\MissingPolicyException;
+use Phauthentic\Authorization\Policy\Exception\MissingPolicyException;
 use InvalidArgumentException;
 
 /**
@@ -87,7 +87,7 @@ class MapResolver implements ResolverInterface
      * {@inheritDoc}
      *
      * @throws \InvalidArgumentException When a resource is not an object.
-     * @throws \Authorization\Policy\Exception\MissingPolicyException When a policy for a resource has not been defined.
+     * @throws \Phauthentic\Authorization\Policy\Exception\MissingPolicyException When a policy for a resource has not been defined.
      */
     public function getPolicy($resource)
     {

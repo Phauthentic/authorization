@@ -12,10 +12,10 @@
  * @since         1.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Authorization\Middleware;
+namespace Phauthentic\Authorization\Middleware;
 
-use Authorization\AuthorizationServiceInterface;
-use Authorization\Exception\ForbiddenException;
+use Phauthentic\Authorization\AuthorizationServiceInterface;
+use Phauthentic\Authorization\Exception\ForbiddenException;
 use Cake\Core\InstanceConfigTrait;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -61,7 +61,7 @@ class RequestAuthorizationMiddleware
      * Gets the authorization service from the request attribute
      *
      * @param \Psr\Http\Message\ServerRequestInterface $request Server request.
-     * @return \Authorization\AuthorizationServiceInterface
+     * @return \Phauthentic\Authorization\AuthorizationServiceInterface
      */
     protected function getServiceFromRequest(ServerRequestInterface $request)
     {

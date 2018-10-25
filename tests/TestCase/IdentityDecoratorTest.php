@@ -2,11 +2,11 @@
 namespace Authorization\Test;
 
 use ArrayObject;
-use Authorization\AuthorizationServiceInterface;
-use Authorization\IdentityDecorator;
+use Phauthentic\Authorization\AuthorizationServiceInterface;
+use Phauthentic\Authorization\IdentityDecorator;
 use BadMethodCallException;
-use Cake\TestSuite\TestCase;
 use InvalidArgumentException;
+use PHPUnit\Framework\TestCase;
 use stdClass;
 use TestApp\Model\Entity\Article;
 

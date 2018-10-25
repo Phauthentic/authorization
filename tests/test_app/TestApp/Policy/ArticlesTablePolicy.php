@@ -1,7 +1,7 @@
 <?php
 namespace TestApp\Policy;
 
-use Authorization\IdentityInterface;
+use Phauthentic\Authorization\IdentityInterface;
 use Cake\Datasource\QueryInterface;
 
 class ArticlesTablePolicy

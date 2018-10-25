@@ -12,7 +12,7 @@
  * @since         1.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Authorization\Policy;
+namespace Phauthentic\Authorization\Policy;
 
 /**
  * Policy resolver interface.
@@ -28,7 +28,7 @@ interface ResolverInterface
      *
      * @param mixed $resource A resource that the access is checked against.
      * @return object
-     * @throws \Authorization\Policy\Exception\MissingPolicyException If a policy cannot be resolved.
+     * @throws \Phauthentic\Authorization\Policy\Exception\MissingPolicyException If a policy cannot be resolved.
      */
     public function getPolicy($resource);
 }

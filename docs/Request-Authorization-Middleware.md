@@ -38,7 +38,7 @@ Map the request class to the policy.
 
 ```php
 use App\Policy\RequestPolicy;
-use Authorization\Policy\MapResolver;
+use Phauthentic\Authorization\Policy\MapResolver;
 use Cake\Http\ServerRequest;
 
 $map = new MapResolver();

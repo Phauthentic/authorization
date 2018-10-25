@@ -12,10 +12,10 @@
  * @since         1.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Authorization\Exception;
+namespace Phauthentic\Authorization\Exception;
 
-use Cake\Core\Exception\Exception as CakeException;
+use RuntimeException;
 
-class Exception extends CakeException
+class Exception extends RuntimeException
 {
 }

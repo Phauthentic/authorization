@@ -18,7 +18,7 @@ you can create your own resolver by implementing the
 objects, or factory callables:
 
 ```php
-use Authorization\Policy\MapResolver;
+use Phauthentic\Authorization\Policy\MapResolver;
 
 $map = new MapResolver();
 
@@ -65,7 +65,7 @@ generated based on the resulting table class.
 The OrmResolver supports customization through its constructor:
 
 ```php
-use Authorization\Policy\OrmResolver;
+use Phauthentic\Authorization\Policy\OrmResolver;
 
 // Change when using a custom application namespace.
 $appNamespace = 'App';
@@ -84,9 +84,9 @@ $resolver = new OrmResolver($appNamespace, $overrides)
 `ResolverCollection` allows you to aggregate multiple resolvers together:
 
 ```php
-use Authorization\Policy\ResolverCollection;
-use Authorization\Policy\MapResolver;
-use Authorization\Policy\OrmResolver;
+use Phauthentic\Authorization\Policy\ResolverCollection;
+use Phauthentic\Authorization\Policy\MapResolver;
+use Phauthentic\Authorization\Policy\OrmResolver;
 
 $orm = new OrmResolver();
 $map = new MapResolver();

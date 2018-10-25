@@ -12,7 +12,7 @@
  * @since         1.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Authorization;
+namespace Phauthentic\Authorization;
 
 use ArrayAccess;
 use BadMethodCallException;
@@ -38,14 +38,14 @@ class IdentityDecorator implements IdentityInterface
     /**
      * Authorization Service
      *
-     * @var \Authorization\AuthorizationServiceInterface
+     * @var \Phauthentic\Authorization\AuthorizationServiceInterface
      */
     protected $authorization;
 
     /**
      * Constructor
      *
-     * @param \Authorization\AuthorizationServiceInterface $service The authorization service.
+     * @param \Phauthentic\Authorization\AuthorizationServiceInterface $service The authorization service.
      * @param array|\ArrayAccess $identity Identity data
      * @throws \InvalidArgumentException When invalid identity data is passed.
      */

@@ -59,13 +59,52 @@ class MapResolver implements ResolverInterface
      * @return $this
      * @throws \InvalidArgumentException When a resource class does not exist or policy is invalid.
      */
-    public function map($resourceClass, $policy)
+    public function map($resourceClass, $policy): ResolverInterface
+    {
+        $this->resourceClassExists($resourceClass);
+        $this->validatePolicyObject($policy);
+        $this->policyClassExists($policy);
+        $this->map[$resourceClass] = $policy;
+
+        return $this;
+    }
+
+    /**
+     * Checks if the policy class exists
+     *
+     * @param string|object|callable $policy A policy class name, an object or a callable factory.
+     * @return void
+     */
+    protected function policyClassExists($policy): void
+    {
+        if (is_string($policy) && !class_exists($policy)) {
+            $message = sprintf('Policy class `%s` does not exist.', $policy);
+            throw new InvalidArgumentException($message);
+        }
+    }
+
+    /**
+     * Checks if the resource class exists
+     *
+     * @param string $resourceClass A resource class name.
+     * @return void
+     */
+    protected function resourceClassExists($resourceClass): void
     {
         if (!class_exists($resourceClass)) {
             $message = sprintf('Resource class `%s` does not exist.', $resourceClass);
             throw new InvalidArgumentException($message);
         }
+    }
 
+    /**
+     * Checks if the policy variable is of a valid type
+     *
+     * @param string|object|callable
+     * @return void
+     */
+    protected function validatePolicyObject($policy): void
+    {
         if (!is_string($policy) && !is_object($policy) && !is_callable($policy)) {
             $message = sprintf(
                 'Policy must be a valid class name, an object or a callable, `%s` given.',
@@ -73,14 +112,6 @@ class MapResolver implements ResolverInterface
             );
             throw new InvalidArgumentException($message);
         }
-        if (is_string($policy) && !class_exists($policy)) {
-            $message = sprintf('Policy class `%s` does not exist.', $policy);
-            throw new InvalidArgumentException($message);
-        }
-
-        $this->map[$resourceClass] = $policy;
-
-        return $this;
     }
 
     /**

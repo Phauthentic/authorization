@@ -14,14 +14,14 @@
  */
 namespace Authorization\Test\TestCase\Middleware;
 
-use Authorization\AuthorizationService;
-use Authorization\Exception\ForbiddenException;
-use Authorization\Middleware\AuthorizationMiddleware;
-use Authorization\Middleware\RequestAuthorizationMiddleware;
-use Authorization\Policy\MapResolver;
+use Phauthentic\Authorization\AuthorizationService;
+use Phauthentic\Authorization\Exception\ForbiddenException;
+use Phauthentic\Authorization\Middleware\AuthorizationMiddleware;
+use Phauthentic\Authorization\Middleware\RequestAuthorizationMiddleware;
+use Phauthentic\Authorization\Policy\MapResolver;
 use Cake\Http\Response;
 use Cake\Http\ServerRequest;
-use Cake\TestSuite\TestCase;
+use PHPUnit\Framework\TestCase;
 use RuntimeException;
 use TestApp\Policy\RequestPolicy;
 use Zend\Diactoros\Uri;

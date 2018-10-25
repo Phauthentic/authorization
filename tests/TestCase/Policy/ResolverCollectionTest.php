@@ -18,7 +18,7 @@ use Phauthentic\Authorization\Policy\Exception\MissingPolicyException;
 use Phauthentic\Authorization\Policy\MapResolver;
 use Phauthentic\Authorization\Policy\ResolverCollection;
 use Phauthentic\Authorization\Policy\ResolverInterface;
-use Cake\TestSuite\TestCase;
+use PHPUnit\Framework\TestCase;
 use TestApp\Model\Entity\Article;
 use TestApp\Policy\ArticlePolicy;
 

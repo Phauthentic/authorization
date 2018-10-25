@@ -6,17 +6,7 @@ Install the plugin with [composer](https://getcomposer.org/) from your CakePHP
 Project's ROOT directory (where the **composer.json** file is located)
 
 ```sh
-php composer.phar require cakephp/authorization
-```
-
-Load the plugin by adding the following statement in your project's `src/Application.php`
-
-```php
-$this->addPlugin('Authorization');
-```
-Prior to 3.6.0
-```php
-Plugin::load('Authorization');
+composer require cakephp/authorization
 ```
 
 ## Getting Started

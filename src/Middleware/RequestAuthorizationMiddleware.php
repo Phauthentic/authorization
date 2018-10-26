@@ -16,7 +16,6 @@ namespace Phauthentic\Authorization\Middleware;
 
 use Phauthentic\Authorization\AuthorizationServiceInterface;
 use Phauthentic\Authorization\Exception\ForbiddenException;
-use Cake\Core\InstanceConfigTrait;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use RuntimeException;
@@ -33,29 +32,20 @@ use RuntimeException;
  */
 class RequestAuthorizationMiddleware
 {
-
-    use InstanceConfigTrait;
+    /**
+     * @var string
+     */
+    protected $authorizationAttribute = 'authorization';
 
     /**
-     * Default Config
-     *
-     * @var array
+     * @var string
      */
-    protected $_defaultConfig = [
-        'authorizationAttribute' => 'authorization',
-        'identityAttribute' => 'identity',
-        'method' => 'access'
-    ];
+    protected $identityAttribute = 'identity';
 
     /**
-     * Constructor
-     *
-     * @param array $config Configuration options
+     * @var string
      */
-    public function __construct($config = [])
-    {
-        $this->setConfig($config);
-    }
+    protected $method = 'access';
 
     /**
      * Gets the authorization service from the request attribute
@@ -65,13 +55,12 @@ class RequestAuthorizationMiddleware
      */
     protected function getServiceFromRequest(ServerRequestInterface $request)
     {
-        $serviceAttribute = $this->getConfig('authorizationAttribute');
-        $service = ($request->getAttribute($serviceAttribute));
+        $service = ($request->getAttribute($this->authorizationAttribute));
 
         if (!$service instanceof AuthorizationServiceInterface) {
             $errorMessage = __CLASS__ . ' could not find the authorization service in the request attribute. ' .
                 'Make sure you added the AuthorizationMiddleware before this middleware or that you ' .
-                'somehow else added the service to the requests `' . $serviceAttribute . '` attribute.';
+                'somehow else added the service to the requests `' . $this->authorizationAttribute . '` attribute.';
 
             throw new RuntimeException($errorMessage);
         }
@@ -90,12 +79,33 @@ class RequestAuthorizationMiddleware
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, $next)
     {
         $service = $this->getServiceFromRequest($request);
-        $identity = $request->getAttribute($this->getConfig('identityAttribute'));
+        $identity = $request->getAttribute($this->identityAttribute);
 
-        if (!$service->can($identity, $this->getConfig('method'), $request)) {
+        if (!$service->can($identity, $this->method, $request)) {
             throw new ForbiddenException();
         }
 
         return $next($request, $response);
+    }
+
+    public function setAuthorizationAttribute(string $attributeName): self
+    {
+        $this->authorizationAttribute = $attributeName;
+
+        return $this;
+    }
+
+    public function setIdentityAttribute(string $attributeName): self
+    {
+        $this->identityAttribute = $attributeName;
+
+        return $this;
+    }
+
+    public function setMethod(string $method): self
+    {
+        $this->method = $method;
+
+        return $this;
     }
 }

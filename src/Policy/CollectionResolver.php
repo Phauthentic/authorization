@@ -39,37 +39,37 @@ use Phauthentic\Authorization\Policy\Exception\MissingPolicyException;
  * $service = new AuthenticationService($collection);
  * ```
  */
-class ResolverCollection implements ResolverCollectionInterface
+class CollectionResolver implements ResolverInterface
 {
     /**
      * Policy resolver instances.
      *
      * @var \Phauthentic\Authorization\Policy\ResolverInterface[]
      */
-    protected $resolvers = [];
+    protected $collection;
 
     /**
      * Constructor. Takes an array of policy resolver instances.
      *
      * @param \Phauthentic\Authorization\Policy\ResolverInterface[] $resolvers An array of policy resolver instances.
      */
-    public function __construct(array $resolvers = [])
+    public function __construct(ResolverCollection $collection)
     {
-        foreach ($resolvers as $resolver) {
-            $this->add($resolver);
-        }
+        $this->collection = $collection;
     }
 
     /**
-     * Adds a resolver to the collection.
-     *
-     * @param \Phauthentic\Authorization\Policy\ResolverInterface $resolver Resolver instance.
-     * @return $this
+     * {@inheritDoc}
      */
-    public function add(ResolverInterface $resolver): ResolverCollectionInterface
+    public function getPolicy($resource)
     {
-        $this->resolvers[] = $resolver;
+        foreach ($this->collection as $resolver) {
+            try {
+                return $resolver->getPolicy($resource);
+            } catch (MissingPolicyException $e) {
+            }
+        }
 
-        return $this;
+        throw new MissingPolicyException($resource);
     }
 }

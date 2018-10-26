@@ -21,7 +21,6 @@ use Phauthentic\Authorization\Exception\Exception;
 use Phauthentic\Authorization\IdentityDecorator;
 use Phauthentic\Authorization\IdentityInterface;
 use Phauthentic\Authorization\Middleware\UnauthorizedHandler\HandlerFactory;
-use Cake\Core\InstanceConfigTrait;
 use InvalidArgumentException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -60,14 +59,14 @@ class AuthorizationMiddleware
     /**
      * Authorization service or application instance.
      *
-     * @var \Phauthentic\Authorization\AuthorizationServiceInterface|\Authorization\AuthorizationServiceProviderInterface
+     * @var \Phauthentic\Authorization\AuthorizationServiceInterface|\Phauthentic\Authorization\AuthorizationServiceProviderInterface
      */
     protected $subject;
 
     /**
      * Constructor.
      *
-     * @param \Phauthentic\Authorization\AuthorizationServiceInterface|\Authorization\AuthorizationServiceProviderInterface $subject Authorization service or provider instance.
+     * @param \Phauthentic\Authorization\AuthorizationServiceInterface|\Phauthentic\Authorization\AuthorizationServiceProviderInterface $subject Authorization service or provider instance.
      * @param array $config Config array.
      * @throws \InvalidArgumentException
      */

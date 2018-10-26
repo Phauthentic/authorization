@@ -16,19 +16,15 @@ declare(strict_types = 1);
 namespace Phauthentic\Authorization\Policy;
 
 /**
- * Policy resolver interface.
+ * ResolverCollectionInterface
  */
-interface ResolverInterface
+interface ResolverCollectionInterface
 {
     /**
-     * Resolves the policy object based on the authorization resource.
+     * Adds a resolver to the collection.
      *
-     * The resolver MUST throw the `\Authorization\Policy\Exception\MissingPolicyException`
-     * exception if a policy cannot be resolved for a given resource.
-     *
-     * @param mixed $resource A resource that the access is checked against.
-     * @return object
-     * @throws \Phauthentic\Authorization\Policy\Exception\MissingPolicyException If a policy cannot be resolved.
+     * @param \Phauthentic\Authorization\Policy\ResolverInterface $resolver Resolver instance.
+     * @return $this
      */
-    public function getPolicy($resource);
+    public function add(ResolverInterface $resolver): ResolverCollectionInterface;
 }

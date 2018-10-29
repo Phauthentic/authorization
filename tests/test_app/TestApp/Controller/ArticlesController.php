@@ -1,9 +1,7 @@
 <?php
 namespace TestApp\Authorization\Controller;
 
-use Cake\Controller\Controller;
-
-class ArticlesController extends Controller
+class ArticlesController
 {
     public function add()
     {

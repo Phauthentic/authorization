@@ -14,17 +14,15 @@
  */
 namespace Authorization\Test\TestCase\Middleware;
 
-use Authorization\AuthorizationServiceInterface;
-use Authorization\AuthorizationServiceProviderInterface;
-use Authorization\Exception\AuthorizationRequiredException;
-use Authorization\Exception\Exception;
-use Authorization\IdentityDecorator;
-use Authorization\IdentityInterface;
-use Authorization\Middleware\AuthorizationMiddleware;
-use Cake\Http\Response;
-use Cake\Http\ServerRequest;
-use Cake\TestSuite\TestCase;
+use Phauthentic\Authorization\AuthorizationServiceInterface;
+use Phauthentic\Authorization\AuthorizationServiceProviderInterface;
+use Phauthentic\Authorization\Exception\AuthorizationRequiredException;
+use Phauthentic\Authorization\Exception\Exception;
+use Phauthentic\Authorization\IdentityDecorator;
+use Phauthentic\Authorization\IdentityInterface;
+use Phauthentic\Authorization\Middleware\AuthorizationMiddleware;
 use InvalidArgumentException;
+use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;

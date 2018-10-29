@@ -27,7 +27,7 @@ class MissingPolicyException extends Exception
      *
      * @var string
      */
-    protected $_messageTemplate = 'Policy for `%s` has not been defined.';
+    protected $messageTemplate = 'Policy for `%s` has not been defined.';
 
     /**
      * {@inheritDoc}

@@ -26,5 +26,5 @@ class ForbiddenException extends Exception
     /**
      * {@inheritDoc}
      */
-    protected $_messageTemplate = 'Identity is not authorized to perform `%s` on `%s`.';
+    protected $messageTemplate = 'Identity is not authorized to perform `%s` on `%s`.';
 }

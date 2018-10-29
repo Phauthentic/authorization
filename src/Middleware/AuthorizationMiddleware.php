@@ -33,8 +33,6 @@ use RuntimeException;
  */
 class AuthorizationMiddleware
 {
-    use InstanceConfigTrait;
-
     /**
      * Default config.
      *
@@ -55,6 +53,11 @@ class AuthorizationMiddleware
         'requireAuthorizationCheck' => true,
         'unauthorizedHandler' => 'Authorization.Exception',
     ];
+
+    protected $identityDecorator = IdentityDecorator::class;
+    protected $identityAttribute = 'identity';
+    protected $requireAuthorizationCheck = true;
+    protected $unauthorizedHandler = 'Authorization.Exception';
 
     /**
      * Authorization service or application instance.
@@ -100,7 +103,7 @@ class AuthorizationMiddleware
         $service = $this->getAuthorizationService($request, $response);
         $request = $request->withAttribute('authorization', $service);
 
-        $attribute = $this->getConfig('identityAttribute');
+        $attribute = $this->identityAttribute;
         $identity = $request->getAttribute($attribute);
 
         if ($identity !== null) {
@@ -110,12 +113,12 @@ class AuthorizationMiddleware
 
         try {
             $response = $next($request, $response);
-            if ($this->getConfig('requireAuthorizationCheck') && !$service->authorizationChecked()) {
+            if ($this->requireAuthorizationCheck && !$service->authorizationChecked()) {
                 throw new AuthorizationRequiredException(['url' => $request->getRequestTarget()]);
             }
         } catch (Exception $exception) {
             $handler = $this->getHandler();
-            $response = $handler->handle($exception, $request, $response, (array)$this->getConfig('unauthorizedHandler'));
+            $response = $handler->handle($exception, $request, $response, (array)$this->unauthorizedHandler);
         }
 
         return $response;
@@ -128,7 +131,7 @@ class AuthorizationMiddleware
      */
     protected function getHandler()
     {
-        $handler = $this->getConfig('unauthorizedHandler');
+        $handler = $this->unauthorizedHandler;
         if (!is_array($handler)) {
             $handler = [
                 'className' => $handler,
@@ -176,7 +179,7 @@ class AuthorizationMiddleware
      */
     protected function buildIdentity(AuthorizationServiceInterface $service, $identity)
     {
-        $class = $this->getConfig('identityDecorator');
+        $class = $this->identityDecorator;
 
         if (is_callable($class)) {
             $identity = $class($service, $identity);

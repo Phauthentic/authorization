@@ -14,8 +14,8 @@
  */
 namespace Authorization\Test\TestCase\Middleware\UnauthorizedHandler;
 
-use Authorization\Middleware\UnauthorizedHandler\HandlerFactory;
-use Cake\TestSuite\TestCase;
+use Phauthentic\Authorization\Middleware\UnauthorizedHandler\HandlerFactory;
+use PHPUnit\Framework\TestCase;
 use RuntimeException;
 use TestApp\Middleware\UnauthorizedHandler\SuppressHandler;
 

@@ -25,9 +25,12 @@ use TestApp\Model\Entity\Article;
 use TestApp\Policy\ArticlePolicy;
 use TestApp\Policy\MagicCallPolicy;
 
+/**
+ * AuthorizationServiceTest
+ */
 class AuthorizationServiceTest extends TestCase
 {
-    public function testNullUserCan()
+    public function testNullUserCan(): void
     {
         $resolver = new MapResolver([
             Article::class => ArticlePolicy::class
@@ -44,7 +47,7 @@ class AuthorizationServiceTest extends TestCase
         $this->assertTrue($result);
     }
 
-    public function testCan()
+    public function testCan(): void
     {
         $resolver = new MapResolver([
             Article::class => ArticlePolicy::class
@@ -60,7 +63,7 @@ class AuthorizationServiceTest extends TestCase
         $this->assertTrue($result);
     }
 
-    public function testAuthorizationCheckedWithCan()
+    public function testAuthorizationCheckedWithCan(): void
     {
         $resolver = new MapResolver([
             Article::class => ArticlePolicy::class
@@ -76,7 +79,7 @@ class AuthorizationServiceTest extends TestCase
         $this->assertTrue($service->authorizationChecked());
     }
 
-    public function testCallingMagicCallPolicy()
+    public function testCallingMagicCallPolicy(): void
     {
         $resolver = new MapResolver([
             Article::class => MagicCallPolicy::class
@@ -93,7 +96,7 @@ class AuthorizationServiceTest extends TestCase
         $this->assertFalse($service->can($user, 'cantDoThis', $article));
     }
 
-    public function testAuthorizationCheckedWithApplyScope()
+    public function testAuthorizationCheckedWithApplyScope(): void
     {
         $resolver = new MapResolver([
             Article::class => ArticlePolicy::class
@@ -110,7 +113,7 @@ class AuthorizationServiceTest extends TestCase
         $this->assertTrue($service->authorizationChecked());
     }
 
-    public function testSkipAuthorization()
+    public function testSkipAuthorization(): void
     {
         $resolver = new MapResolver([]);
         $service = new AuthorizationService($resolver);
@@ -120,7 +123,7 @@ class AuthorizationServiceTest extends TestCase
         $this->assertTrue($service->authorizationChecked());
     }
 
-    public function testApplyScope()
+    public function testApplyScope(): void
     {
         $resolver = new MapResolver([
             Article::class => ArticlePolicy::class
@@ -137,7 +140,7 @@ class AuthorizationServiceTest extends TestCase
         $this->assertSame($article->user_id, $user->getOriginalData()['id']);
     }
 
-    public function testApplyScopeMethodMissing()
+    public function testApplyScopeMethodMissing(): void
     {
         $this->expectException(MissingMethodException::class);
 
@@ -154,7 +157,7 @@ class AuthorizationServiceTest extends TestCase
         $result = $service->applyScope($user, 'nope', $article);
     }
 
-    public function testBeforeFalse()
+    public function testBeforeFalse(): void
     {
         $entity = new Article();
 
@@ -184,7 +187,7 @@ class AuthorizationServiceTest extends TestCase
         $this->assertFalse($result);
     }
 
-    public function testBeforeTrue()
+    public function testBeforeTrue(): void
     {
         $entity = new Article();
 
@@ -214,7 +217,7 @@ class AuthorizationServiceTest extends TestCase
         $this->assertTrue($result);
     }
 
-    public function testBeforeNull()
+    public function testBeforeNull(): void
     {
         $entity = new Article();
 
@@ -246,7 +249,7 @@ class AuthorizationServiceTest extends TestCase
         $this->assertTrue($result);
     }
 
-    public function testBeforeOther()
+    public function testBeforeOther(): void
     {
         $entity = new Article();
 
@@ -278,7 +281,7 @@ class AuthorizationServiceTest extends TestCase
         $service->can($user, 'add', $entity);
     }
 
-    public function testMissingMethod()
+    public function testMissingMethod(): void
     {
         $entity = new Article();
 

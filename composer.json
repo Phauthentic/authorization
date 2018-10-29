@@ -15,6 +15,7 @@
         "psr/http-server-middleware": "^1.0"
     },
     "require-dev": {
+        "phpunit/dbunit": "^4.0",
         "phpunit/phpunit": "^7.4",
         "squizlabs/php_codesniffer": "^3.3"
     },
@@ -22,12 +23,12 @@
     "minimum-stability": "stable",
     "autoload": {
         "psr-4": {
-            "Authorization\\": "src/"
+            "Phauthentic\\Authorization\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Authorization\\Test\\": "tests/",
+            "Phauthentic\\Authorization\\Test\\": "tests/",
             "Cake\\Test\\": "vendor/cakephp/cakephp/tests/",
             "OverridePlugin\\": "tests/test_app/Plugin/OverridePlugin/src/",
             "TestApp\\": "tests/test_app/TestApp/",

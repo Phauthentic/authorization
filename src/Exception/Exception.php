@@ -16,7 +16,28 @@ declare(strict_types = 1);
 namespace Phauthentic\Authorization\Exception;
 
 use RuntimeException;
+use Throwable;
 
+/**
+ * Exception
+ */
 class Exception extends RuntimeException
 {
+    /**
+     * @var string
+     */
+    protected $messageTemplate = '';
+
+    /**
+     * Method to format the predefined message template and use it as message
+     *
+     * @param array $values Values
+     * @return $this
+     */
+    public function setMessageVars(array $values = [])
+    {
+        $this->message = vsprintf($this->messageTemplate, $values);
+
+        return $this;
+    }
 }

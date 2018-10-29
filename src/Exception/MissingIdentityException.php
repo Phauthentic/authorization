@@ -26,5 +26,5 @@ class MissingIdentityException extends Exception
     /**
      * {@inheritDoc}
      */
-    protected $_messageTemplate = 'Identity is not present in `%s` request attribute.';
+    protected $messageTemplate = 'Identity is not present in `%s` request attribute.';
 }

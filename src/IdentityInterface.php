@@ -33,7 +33,7 @@ interface IdentityInterface extends ArrayAccess
      * @param mixed $resource The resource being operated on.
      * @return bool
      */
-    public function can($action, $resource);
+    public function can($action, $resource): bool;
 
     /**
      * Apply authorization scope conditions/restrictions.

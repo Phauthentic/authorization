@@ -14,12 +14,12 @@
  */
 namespace Authorization\Test\TestCase\Middleware\UnauthorizedHandler;
 
-use Authorization\Exception\Exception;
-use Authorization\Middleware\UnauthorizedHandler\CakeRedirectHandler;
+use Phauthentic\Authorization\Exception\Exception;
+use Phauthentic\Authorization\Middleware\UnauthorizedHandler\CakeRedirectHandler;
 use Cake\Http\Response;
 use Cake\Http\ServerRequest;
 use Cake\Routing\Router;
-use Cake\TestSuite\TestCase;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Description of CakeRedirectHandlerTest

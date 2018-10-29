@@ -18,7 +18,7 @@ namespace Phauthentic\Authorization\Policy\Exception;
 use Phauthentic\Authorization\Exception\Exception;
 
 /**
- * MissingPolicyException
+ * Missing Policy Exception
  */
 class MissingPolicyException extends Exception
 {

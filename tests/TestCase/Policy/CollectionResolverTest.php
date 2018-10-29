@@ -14,6 +14,7 @@
  */
 namespace Authorization\Test\TestCase\Policy;
 
+use Phauthentic\Authorization\Policy\CollectionResolver;
 use Phauthentic\Authorization\Policy\Exception\MissingPolicyException;
 use Phauthentic\Authorization\Policy\MapResolver;
 use Phauthentic\Authorization\Policy\ResolverCollection;
@@ -23,21 +24,33 @@ use TestApp\Model\Entity\Article;
 use TestApp\Policy\ArticlePolicy;
 
 /**
- * ResolverCollectionTest
+ * Collection Resolver Test
  */
-class ResolverCollectionTest extends TestCase
+class CollectionResolverTest extends TestCase
 {
     /**
-     * testCount
+     * testGetPolicy
      *
      * @return void
      */
-    public function testCount(): void
+    public function testGetPolicy(): void
     {
-        $resolver = new ResolverCollection([
-            new MapResolver()
+        $resource = new Article();
+        $policy = new ArticlePolicy();
+
+        $resolver1 = new MapResolver();
+        $resolver2 = new MapResolver([
+            Article::class => $policy
         ]);
 
-        $this->assertCount(1, $resolver);
+        $collection = new ResolverCollection([
+            $resolver1,
+            $resolver2
+        ]);
+
+        $collectionResolver = new CollectionResolver($collection);
+
+        $result = $collectionResolver->getPolicy($resource);
+        $this->assertSame($policy, $result);
     }
 }

@@ -15,10 +15,12 @@ declare(strict_types = 1);
  */
 namespace Phauthentic\Authorization\Policy;
 
+use IteratorAggregate;
+
 /**
  * ResolverCollectionInterface
  */
-interface ResolverCollectionInterface
+interface ResolverCollectionInterface extends IteratorAggregate
 {
     /**
      * Adds a resolver to the collection.
@@ -27,4 +29,11 @@ interface ResolverCollectionInterface
      * @return $this
      */
     public function add(ResolverInterface $resolver): ResolverCollectionInterface;
+
+    /**
+     * Gets the count of resolvers in the collection
+     *
+     * @return int
+     */
+    public function count(): int;
 }

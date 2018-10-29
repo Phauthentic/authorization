@@ -15,6 +15,7 @@ declare(strict_types = 1);
  */
 namespace Phauthentic\Authorization\Policy;
 
+use ArrayIterator;
 use Phauthentic\Authorization\Policy\Exception\MissingPolicyException;
 
 /**
@@ -71,5 +72,23 @@ class ResolverCollection implements ResolverCollectionInterface
         $this->resolvers[] = $resolver;
 
         return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function count(): int
+    {
+        return count($this->resolvers);
+    }
+
+    /**
+     * Gets the iterator
+     *
+     * @return \Iterator
+     */
+    public function getIterator()
+    {
+        return new ArrayIterator($this->resolvers);
     }
 }

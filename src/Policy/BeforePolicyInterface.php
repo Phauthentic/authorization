@@ -34,5 +34,5 @@ interface BeforePolicyInterface
      * @param string $action The action/operation being performed.
      * @return bool|null
      */
-    public function before(?IdentityInterface $identity, $resource, string $action): ?bool;
+    public function before($identity, $resource, string $action): ?bool;
 }

@@ -24,25 +24,36 @@ use Psr\Http\Message\ServerRequestInterface;
  */
 class RedirectHandler implements HandlerInterface
 {
+    protected $exceptions = [];
+    protected $url = '/';
+    protected $queryParam = 'redirect';
+    protected $statusCode = 302;
 
-    /**
-     * Default config:
-     *
-     *  - `exceptions` - A list of exception classes.
-     *  - `url` - Url to redirect to.
-     *  - `queryParam` - Query parameter name for the target url.
-     *  - `statusCode` - Redirection status code.
-     *
-     * @var array
-     */
-    protected $defaultOptions = [
-        'exceptions' => [
-            MissingIdentityException::class,
-        ],
-        'url' => '/login',
-        'queryParam' => 'redirect',
-        'statusCode' => 302,
-    ];
+    public function setExceptions(array $exceptions)
+    {
+        $this->exceptions = $exceptions;
+    }
+
+    public function setUrl(string $url)
+    {
+        $this->url = $url;
+
+        return $this;
+    }
+
+    public function setQueryParam(string $queryParam)
+    {
+        $this->queryParam = $queryParam;
+
+        return $this;
+    }
+
+    public function setStatusCode(int $statusCode)
+    {
+        $this->statusCode = $statusCode;
+
+        return $this;
+    }
 
     /**
      * Return a response with a location header set if an exception matches.
@@ -60,8 +71,8 @@ class RedirectHandler implements HandlerInterface
         $url = $this->getUrl($request, $options);
 
         return $response
-                ->withHeader('Location', $url)
-                ->withStatus($options['statusCode']);
+            ->withHeader('Location', $url)
+            ->withStatus($options['statusCode']);
     }
 
     /**
@@ -71,7 +82,7 @@ class RedirectHandler implements HandlerInterface
      * @param array $exceptions A list of exception classes.
      * @return bool
      */
-    protected function checkException(Exception $exception, array $exceptions)
+    protected function checkException(Exception $exception, array $exceptions): bool
     {
         foreach ($exceptions as $class) {
             if ($exception instanceof $class) {

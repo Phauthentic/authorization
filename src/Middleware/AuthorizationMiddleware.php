@@ -70,10 +70,9 @@ class AuthorizationMiddleware
      * Constructor.
      *
      * @param \Phauthentic\Authorization\AuthorizationServiceInterface|\Phauthentic\Authorization\AuthorizationServiceProviderInterface $subject Authorization service or provider instance.
-     * @param array $config Config array.
      * @throws \InvalidArgumentException
      */
-    public function __construct($subject, array $config = [])
+    public function __construct($subject)
     {
         if (!$subject instanceof AuthorizationServiceInterface && !$subject instanceof AuthorizationServiceProviderInterface) {
             $expected = implode('` or `', [
@@ -87,7 +86,6 @@ class AuthorizationMiddleware
         }
 
         $this->subject = $subject;
-        $this->setConfig($config);
     }
 
     /**

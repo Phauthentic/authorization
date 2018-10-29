@@ -16,8 +16,6 @@ namespace Authorization\Test\TestCase\Middleware\UnauthorizedHandler;
 
 use Phauthentic\Authorization\Exception\Exception;
 use Phauthentic\Authorization\Middleware\UnauthorizedHandler\RedirectHandler;
-use Cake\Http\Response;
-use Cake\Http\ServerRequest;
 use PHPUnit\Framework\TestCase;
 
 class RedirectHandlerTest extends TestCase

@@ -26,7 +26,7 @@ class HandlerFactory
      * Creates unauthorized request handler.
      *
      * @param string $name UnauthorizedHandler name.
-     * @return \Authorization\Middleware\UnauthorizedHandler\HandlerInterface
+     * @return \Phauthentic\Authorization\Middleware\UnauthorizedHandler\HandlerInterface
      * @throws \RuntimeException When invalid handler encountered.
      */
     public static function create($name)

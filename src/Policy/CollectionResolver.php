@@ -70,6 +70,9 @@ class CollectionResolver implements ResolverInterface
             }
         }
 
-        throw new MissingPolicyException($resource);
+        $class = get_class($resource);
+        $message = sprintf('Policy for `%s` has not been defined.', $class);
+
+        throw new MissingPolicyException($message);
     }
 }

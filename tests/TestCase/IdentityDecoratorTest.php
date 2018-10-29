@@ -78,8 +78,8 @@ class IdentityDecoratorTest extends TestCase
         $data = new Article(['id' => 1]);
         $auth = $this->createMock(AuthorizationServiceInterface::class);
         $identity = new IdentityDecorator($auth, $data);
-        $this->assertFalse(method_exists($identity, 'isDirty'), 'method not defined on decorator');
-        $this->assertTrue($identity->isDirty('id'), 'method is callable though.');
+        $this->assertFalse(method_exists($identity, 'get'), 'method not defined on decorator');
+        $this->assertEquals(1, $identity->get('id'), 'method is callable though.');
     }
 
     public function testCallArray()
@@ -131,10 +131,10 @@ class IdentityDecoratorTest extends TestCase
         $auth = $this->createMock(AuthorizationServiceInterface::class);
         $identity = new IdentityDecorator($auth, $data);
 
-        $this->assertTrue(isset($identity->id));
-        $this->assertSame($data->id, $identity->id);
+        $this->assertTrue(isset($identity['id']));
+        $this->assertSame($data['id'], $identity['id']);
 
-        $this->assertFalse(isset($identity->unknown));
-        $this->assertNull($identity->unknown);
+        $this->assertFalse(isset($identity['unknown']));
+        $this->assertNull($identity['unknown']);
     }
 }

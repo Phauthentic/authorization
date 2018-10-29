@@ -249,38 +249,6 @@ class AuthorizationServiceTest extends TestCase
         $this->assertTrue($result);
     }
 
-    public function testBeforeOther(): void
-    {
-        $entity = new Article();
-
-        $policy = $this->getMockBuilder(BeforePolicyInterface::class)
-            ->setMethods(['before', 'canAdd'])
-            ->getMock();
-
-        $policy->expects($this->once())
-            ->method('before')
-            ->with($this->isInstanceOf(IdentityDecorator::class), $entity, 'add')
-            ->willReturn('foo');
-
-        $policy->expects($this->never())
-            ->method('canAdd');
-
-        $resolver = new MapResolver([
-            Article::class => $policy
-        ]);
-
-        $service = new AuthorizationService($resolver);
-
-        $user = new IdentityDecorator($service, [
-            'role' => 'admin'
-        ]);
-
-        $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage('Pre-authorization check must return `bool` or `null`.');
-
-        $service->can($user, 'add', $entity);
-    }
-
     public function testMissingMethod(): void
     {
         $entity = new Article();

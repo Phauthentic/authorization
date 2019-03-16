@@ -1,8 +1,8 @@
 # Authorization
 
-[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.txt)
-[![Build Status](https://img.shields.io/travis/Phauthentic/authorization/master.svg?style=flat-square)](https://travis-ci.org/Phauthentic/authorization)
-[![Coverage Status](https://img.shields.io/codecov/c/github/Phauthentic/authorization.svg?style=flat-square)](https://codecov.io/github/Phauthentic/authorization)
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
+[![Scrutinizer Coverage](https://img.shields.io/scrutinizer/coverage/g/Phauthentic/authorization/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/Phauthentic/authorization/)
+[![Code Quality](https://img.shields.io/scrutinizer/g/Phauthentic/authorization/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/Phauthentic/authorization/)
 
 A framework agnostic authorization library based on policies.
 

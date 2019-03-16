@@ -55,6 +55,14 @@ class RedirectHandler implements HandlerInterface
         return $this;
     }
 
+    protected function getDefaults() {
+		return [
+			'exceptions' => $this->exceptions,
+		   'url' => $this->url,
+		   'queryParam' => $this->queryParam,
+		   'statusCode' => $this->statusCode
+		];
+    }
     /**
      * Return a response with a location header set if an exception matches.
      *
@@ -62,7 +70,7 @@ class RedirectHandler implements HandlerInterface
      */
     public function handle(Exception $exception, ServerRequestInterface $request, ResponseInterface $response, array $options = [])
     {
-        $options += $this->defaultOptions;
+        $options += $this->getDefaults();
 
         if (!$this->checkException($exception, $options['exceptions'])) {
             throw $exception;

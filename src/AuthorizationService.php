@@ -20,6 +20,9 @@ use Phauthentic\Authorization\Policy\Exception\MissingMethodException;
 use Phauthentic\Authorization\Policy\ResolverInterface;
 use RuntimeException;
 
+/**
+ * Authorization Service
+ */
 class AuthorizationService implements AuthorizationServiceInterface
 {
     /**
@@ -49,7 +52,7 @@ class AuthorizationService implements AuthorizationServiceInterface
     /**
      * {@inheritDoc}
      */
-    public function can($user, $action, $resource)
+    public function can(?IdentityInterface $user, string $action, $resource)
     {
         $this->authorizationChecked = true;
         $policy = $this->resolver->getPolicy($resource);
@@ -74,7 +77,7 @@ class AuthorizationService implements AuthorizationServiceInterface
     /**
      * {@inheritDoc}
      */
-    public function applyScope($user, $action, $resource)
+    public function applyScope(?IdentityInterface $user, string $action, $resource)
     {
         $this->authorizationChecked = true;
         $policy = $this->resolver->getPolicy($resource);

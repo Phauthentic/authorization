@@ -16,6 +16,9 @@ declare(strict_types = 1);
 
 namespace Phauthentic\Authorization\Exception;
 
+/**
+ * Forbidden Exception
+ */
 class ForbiddenException extends Exception
 {
     /**

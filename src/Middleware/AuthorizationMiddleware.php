@@ -112,7 +112,10 @@ class AuthorizationMiddleware
         try {
             $response = $next($request, $response);
             if ($this->requireAuthorizationCheck && !$service->authorizationChecked()) {
-                throw new AuthorizationRequiredException(['url' => $request->getRequestTarget()]);
+                throw new AuthorizationRequiredException(sprintf(
+                    'The request to `%s` did not apply any authorization checks.',
+                    $request->getRequestTarget()
+                ));
             }
         } catch (Exception $exception) {
             $handler = $this->getHandler();

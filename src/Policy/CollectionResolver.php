@@ -15,6 +15,7 @@ declare(strict_types = 1);
  */
 namespace Phauthentic\Authorization\Policy;
 
+use InvalidArgumentException;
 use Phauthentic\Authorization\Policy\Exception\MissingPolicyException;
 
 /**
@@ -67,6 +68,7 @@ class CollectionResolver implements ResolverInterface
             try {
                 return $resolver->getPolicy($resource);
             } catch (MissingPolicyException $e) {
+            } catch (InvalidArgumentException $e) {
             }
         }
 

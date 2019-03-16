@@ -16,6 +16,9 @@ declare(strict_types = 1);
 
 namespace Phauthentic\Authorization\Exception;
 
+/**
+ * Throw this when an identity is missing
+ */
 class MissingIdentityException extends Exception
 {
     /**

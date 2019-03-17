@@ -17,6 +17,9 @@ namespace Phauthentic\Authorization\Policy\Exception;
 
 use Phauthentic\Authorization\Exception\Exception;
 
+/**
+ * Missing Method Exception
+ */
 class MissingMethodException extends Exception
 {
     /**

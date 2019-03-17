@@ -25,7 +25,6 @@ composer require phauthentic/authorization
  * [Quick Start and Introduction to the basics](docs/Quick-start-and-introduction.md)
  * [Policies](docs/Policies.md)
  * [Policy Resolver](docs/Policy-Resolvers.md)
- * [Middleware](docs/Middleware.md)
  * [Checking Authorization](docs/Checking-Authorization.md)
 
 ## Copyright & License

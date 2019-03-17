@@ -11,15 +11,12 @@
     "type": "library",
     "require": {
         "php": "^7.1",
-        "psr/http-message": "^1.0",
-        "psr/http-server-middleware": "^1.0",
-        "psr/container": "^1.0"
+        "psr/http-message": "^1.0"
     },
     "require-dev": {
         "phpunit/dbunit": "^4.0",
         "phpunit/phpunit": "^7.4",
-        "squizlabs/php_codesniffer": "^3.3",
-        "cakephp/cakephp": "^3.7"
+        "squizlabs/php_codesniffer": "^3.3"
     },
     "license": "MIT",
     "minimum-stability": "stable",
@@ -31,8 +28,6 @@
     "autoload-dev": {
         "psr-4": {
             "Phauthentic\\Authorization\\Test\\": "tests/",
-            "Cake\\Test\\": "vendor/cakephp/cakephp/tests/",
-            "OverridePlugin\\": "tests/test_app/Plugin/OverridePlugin/src/",
             "TestApp\\": "tests/test_app/TestApp/",
             "TestPlugin\\": "tests/test_app/Plugin/TestPlugin/src/"
         }
@@ -44,10 +39,9 @@
         }
     ],
     "support": {
-        "issues": "https://github.com/cakephp/authorization/issues",
-        "forum": "https://stackoverflow.com/tags/cakephp",
-        "irc": "irc://irc.freenode.org/cakephp",
-        "source": "https://github.com/cakephp/authorization"
+        "issues": "https://github.com/phauthentic/authorization/issues",
+        "forum": "https://stackoverflow.com/tags/phauthentic",
+        "source": "https://github.com/phauthentic/authorization"
     },
     "scripts": {
         "check": [

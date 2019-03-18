@@ -32,7 +32,7 @@ interface BeforePolicyInterface
      * @param \Phauthentic\Authorization\IdentityInterface|null $identity Identity object.
      * @param mixed $resource The resource being operated on.
      * @param string $action The action/operation being performed.
-     * @return bool|null
+     * @return \Phauthentic\Authorization\Policy\ResultInterface|bool|null
      */
-    public function before(?IdentityInterface $identity, $resource, string $action): ?bool;
+    public function before(?IdentityInterface $identity, $resource, string $action);
 }

@@ -85,7 +85,5 @@ the [identity stored in the request](./Checking-Authorization.md).
 
 * [Create a Policy](/docs/Policies.md)
 * [Choose a Policy Resolver](/docs/Policy-Resolvers.md)
-* [Using the Middleware](/docs/Middleware.md)
-* [Using the Component](/docs/Component.md)
 * [Checking Authorization](/docs/Checking-Authorization.md)
-* [Authorizing based on request params](/docs/Request-Authorization-Middleware.md)
+

@@ -4,10 +4,11 @@ declare(strict_types = 1);
 namespace Authorization\Test;
 
 use ArrayObject;
-use Phauthentic\Authorization\AuthorizationServiceInterface;
-use Phauthentic\Authorization\IdentityDecorator;
 use BadMethodCallException;
 use InvalidArgumentException;
+use Phauthentic\Authorization\AuthorizationServiceInterface;
+use Phauthentic\Authorization\IdentityDecorator;
+use Phauthentic\Authorization\Policy\Result;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 use TestApp\Model\Entity\Article;
@@ -54,12 +55,14 @@ class IdentityDecoratorTest extends TestCase
         $resource = new stdClass();
         $auth = $this->createMock(AuthorizationServiceInterface::class);
         $identity = new IdentityDecorator($auth, ['id' => 1]);
+        $result = new Result(true);
 
         $auth->expects($this->once())
             ->method('can')
             ->with($identity, 'update', $resource)
-            ->will($this->returnValue(true));
-        $this->assertTrue($identity->can('update', $resource));
+            ->will($this->returnValue($result));
+        $result = $identity->can('update', $resource);
+        $this->assertTrue($result->getStatus());
     }
 
     public function testApplyScopeDelegation()

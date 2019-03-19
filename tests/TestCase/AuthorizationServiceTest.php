@@ -44,10 +44,10 @@ class AuthorizationServiceTest extends TestCase
         $user = null;
 
         $result = $service->can($user, 'view', new Article);
-        $this->assertFalse($result);
+        $this->assertFalse($result->getStatus());
 
         $result = $service->can($user, 'view', new Article(['visibility' => 'public']));
-        $this->assertTrue($result);
+        $this->assertTrue($result->getStatus());
     }
 
     public function testCan(): void
@@ -63,7 +63,7 @@ class AuthorizationServiceTest extends TestCase
         ]);
 
         $result = $service->can($user, 'add', new Article);
-        $this->assertTrue($result);
+        $this->assertTrue($result->getStatus());
     }
 
     public function testCanWithResult()
@@ -157,8 +157,11 @@ class AuthorizationServiceTest extends TestCase
         ]);
 
         $article = new Article();
-        $this->assertTrue($service->can($user, 'doThat', $article));
-        $this->assertFalse($service->can($user, 'cantDoThis', $article));
+        $result = $service->can($user, 'doThat', $article);
+        $this->assertTrue($result->getStatus());
+
+        $result = $service->can($user, 'cantDoThis', $article);
+        $this->assertFalse($result->getStatus());
     }
 
     public function testAuthorizationCheckedWithApplyScope(): void
@@ -225,6 +228,7 @@ class AuthorizationServiceTest extends TestCase
     public function testBeforeFalse(): void
     {
         $entity = new Article();
+        $result = new Result(false);
 
         $policy = $this->getMockBuilder(BeforePolicyInterface::class)
             ->setMethods(['before', 'canAdd'])
@@ -233,7 +237,7 @@ class AuthorizationServiceTest extends TestCase
         $policy->expects($this->once())
             ->method('before')
             ->with($this->isInstanceOf(IdentityDecorator::class), $entity, 'add')
-            ->willReturn(false);
+            ->willReturn($result);
 
         $resolver = new MapResolver([
             Article::class => $policy
@@ -249,12 +253,13 @@ class AuthorizationServiceTest extends TestCase
         ]);
 
         $result = $service->can($user, 'add', $entity);
-        $this->assertFalse($result);
+        $this->assertFalse($result->getStatus());
     }
 
     public function testBeforeTrue(): void
     {
         $entity = new Article();
+        $result = new Result(true);
 
         $policy = $this->getMockBuilder(BeforePolicyInterface::class)
             ->setMethods(['before', 'canAdd'])
@@ -263,7 +268,7 @@ class AuthorizationServiceTest extends TestCase
         $policy->expects($this->once())
             ->method('before')
             ->with($this->isInstanceOf(IdentityDecorator::class), $entity, 'add')
-            ->willReturn(true);
+            ->willReturn($result);
 
         $policy->expects($this->never())
             ->method('canAdd');
@@ -279,12 +284,13 @@ class AuthorizationServiceTest extends TestCase
         ]);
 
         $result = $service->can($user, 'add', $entity);
-        $this->assertTrue($result);
+        $this->assertTrue($result->getStatus());
     }
 
     public function testBeforeNull(): void
     {
         $entity = new Article();
+        $result = new Result(true);
 
         $policy = $this->getMockBuilder(BeforePolicyInterface::class)
             ->setMethods(['before', 'canAdd'])
@@ -298,7 +304,7 @@ class AuthorizationServiceTest extends TestCase
         $policy->expects($this->once())
             ->method('canAdd')
             ->with($this->isInstanceOf(IdentityDecorator::class), $entity)
-            ->willReturn(true);
+            ->willReturn($result);
 
         $resolver = new MapResolver([
             Article::class => $policy
@@ -311,7 +317,7 @@ class AuthorizationServiceTest extends TestCase
         ]);
 
         $result = $service->can($user, 'add', $entity);
-        $this->assertTrue($result);
+        $this->assertTrue($result->getStatus());
     }
 
     public function testMissingMethod(): void

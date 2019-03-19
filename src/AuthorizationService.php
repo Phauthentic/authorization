@@ -53,7 +53,7 @@ class AuthorizationService implements AuthorizationServiceInterface
     /**
      * {@inheritDoc}
      */
-    public function can(?IdentityInterface $user, string $action, $resource)
+    public function can(?IdentityInterface $user, string $action, $resource): ResultInterface
     {
         $this->authorizationChecked = true;
         $policy = $this->resolver->getPolicy($resource);
@@ -61,25 +61,14 @@ class AuthorizationService implements AuthorizationServiceInterface
         if ($policy instanceof BeforePolicyInterface) {
             $result = $policy->before($user, $resource, $action);
 
-            if ($result instanceof ResultInterface || is_bool($result)) {
-                return $result;
-            }
             if ($result !== null) {
-                throw new RuntimeException(
-                    'Pre-authorization check must return `Phauthentic\Authorization\Policy\ResultInterface`, '
-                    . '`bool` or `null`.'
-                );
+                return $result;
             }
         }
 
         $handler = $this->getCanHandler($policy, $action);
-        $result = $handler($user, $resource);
 
-        if ($result instanceof ResultInterface) {
-            return $result;
-        }
-
-        return $result === true;
+        return $handler($user, $resource);
     }
 
     /**
@@ -102,7 +91,7 @@ class AuthorizationService implements AuthorizationServiceInterface
      * @return callable
      * @throws \Phauthentic\Authorization\Policy\Exception\MissingMethodException
      */
-    protected function getCanHandler($policy, $action)
+    protected function getCanHandler($policy, $action): callable
     {
         $method = 'can' . ucfirst($action);
 

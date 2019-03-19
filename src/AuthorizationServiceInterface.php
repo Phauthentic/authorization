@@ -15,6 +15,8 @@ declare(strict_types = 1);
  */
 namespace Phauthentic\Authorization;
 
+use Phauthentic\Authorization\Policy\ResultInterface;
+
 /**
  * Interface for Authorization service
  */
@@ -29,9 +31,9 @@ interface AuthorizationServiceInterface
      * @param \Phauthentic\Authorization\IdentityInterface|null $user The user to check permissions for.
      * @param string $action The action/operation being performed.
      * @param mixed $resource The resource being operated on.
-     * @return bool
+     * @return \Phauthentic\Authorization\Policy\ResultInterface
      */
-    public function can(?IdentityInterface $user, string $action, $resource);
+    public function can(?IdentityInterface $user, string $action, $resource): ResultInterface;
 
     /**
      * Apply authorization scope conditions/restrictions.

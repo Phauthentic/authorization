@@ -18,6 +18,7 @@ namespace Phauthentic\Authorization;
 use ArrayAccess;
 use BadMethodCallException;
 use InvalidArgumentException;
+use Phauthentic\Authorization\Policy\ResultInterface;
 
 /**
  * An decorator implementing the IdentityInterface.
@@ -65,7 +66,7 @@ class IdentityDecorator implements IdentityInterface
     /**
      * {@inheritDoc}
      */
-    public function can($action, $resource)
+    public function can($action, $resource): ResultInterface
     {
         return $this->authorization->can($this, $action, $resource);
     }

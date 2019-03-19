@@ -28,7 +28,7 @@ interface RequestPolicyInterface
      *
      * @param \Phauthentic\Authorization\IdentityInterface|null $identity Identity
      * @param \Psr\Http\Message\ServerRequestInterface $request Server Request
-     * @return bool|\Phauthentic\Authorization\Policy\ResultInterface
+     * @return \Phauthentic\Authorization\Policy\ResultInterface
      */
-    public function canAccess(?IdentityInterface $identity, ServerRequestInterface $request);
+    public function canAccess(?IdentityInterface $identity, ServerRequestInterface $request): ResultInterface;
 }

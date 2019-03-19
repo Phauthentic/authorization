@@ -16,6 +16,8 @@ declare(strict_types = 1);
 
 namespace Phauthentic\Authorization\Exception;
 
+use Phauthentic\Authorization\Policy\ResultInterface;
+
 /**
  * Forbidden Exception
  */
@@ -24,10 +26,39 @@ class ForbiddenException extends Exception
     /**
      * {@inheritDoc}
      */
-    protected $_defaultCode = 403;
+    protected $code = 403;
 
     /**
      * {@inheritDoc}
      */
     protected $messageTemplate = 'Identity is not authorized to perform `%s` on `%s`.';
+    /**
+     * Policy check result.
+     *
+     * @var \ Phauthentic\Authorization\Policy\ResultInterface|null
+     */
+    protected $result;
+
+    /**
+     * Returns policy check result if passed to the exception.
+     *
+     * @param \Phauthentic\Authorization\Policy\ResultInterface|null $result Result
+     * @return $this
+     */
+    public function setResult(?ResultInterface $result)
+    {
+        $this->result = $result;
+
+        return $this;
+    }
+
+    /**
+     * Returns policy check result if passed to the exception.
+     *
+     * @return \Phauthentic\Authorization\Policy\ResultInterface|null
+     */
+    public function getResult(): ?ResultInterface
+    {
+        return $this->result;
+    }
 }

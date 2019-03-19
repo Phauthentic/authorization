@@ -40,7 +40,7 @@ use Phauthentic\Authorization\Policy\Exception\MissingPolicyException;
  * $service = new AuthenticationService($collection);
  * ```
  */
-class ResolverCollection implements ResolverCollectionInterface
+class ResolverCollection implements ResolverInterface, ResolverCollectionInterface
 {
     /**
      * Policy resolver instances.
@@ -90,5 +90,21 @@ class ResolverCollection implements ResolverCollectionInterface
     public function getIterator()
     {
         return new ArrayIterator($this->resolvers);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getPolicy($resource)
+    {
+        foreach ($this->resolvers as $resolver) {
+            try {
+                return $resolver->getPolicy($resource);
+            } catch (MissingPolicyException $e) {
+            }
+        }
+
+        $exception = new MissingPolicyException();
+        throw $exception->setMessageVars([get_class($resource)]);
     }
 }

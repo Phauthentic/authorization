@@ -20,6 +20,8 @@ use Phauthentic\Authorization\IdentityDecorator;
 use Phauthentic\Authorization\Policy\BeforePolicyInterface;
 use Phauthentic\Authorization\Policy\Exception\MissingMethodException;
 use Phauthentic\Authorization\Policy\MapResolver;
+use Phauthentic\Authorization\Policy\Result;
+use Phauthentic\Authorization\Policy\ResultInterface;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 use TestApp\Model\Entity\Article;
@@ -64,6 +66,20 @@ class AuthorizationServiceTest extends TestCase
         $this->assertTrue($result);
     }
 
+    public function testCanWithResult()
+    {
+        $resolver = new MapResolver([
+            Article::class => ArticlePolicy::class
+        ]);
+        $service = new AuthorizationService($resolver);
+        $user = new IdentityDecorator($service, [
+            'role' => 'admin'
+        ]);
+
+        $result = $service->can($user, 'publish', new Article);
+        $this->assertInstanceOf(ResultInterface::class, $result);
+    }
+
     public function testAuthorizationCheckedWithCan(): void
     {
         $resolver = new MapResolver([
@@ -78,6 +94,54 @@ class AuthorizationServiceTest extends TestCase
 
         $service->can($user, 'add', new Article);
         $this->assertTrue($service->authorizationChecked());
+    }
+
+    public function testBeforeResultTrue()
+    {
+        $entity = new Article();
+        $policy = $this->getMockBuilder(BeforePolicyInterface::class)
+            ->setMethods(['before', 'canAdd'])
+            ->getMock();
+        $policy->expects($this->once())
+            ->method('before')
+            ->with($this->isInstanceOf(IdentityDecorator::class), $entity, 'add')
+            ->willReturn(new Result(true));
+        $policy->expects($this->never())
+            ->method('canAdd');
+        $resolver = new MapResolver([
+            Article::class => $policy
+        ]);
+        $service = new AuthorizationService($resolver);
+        $user = new IdentityDecorator($service, [
+            'role' => 'admin'
+        ]);
+        $result = $service->can($user, 'add', $entity);
+        $this->assertInstanceOf(ResultInterface::class, $result);
+        $this->assertTrue($result->getStatus());
+    }
+
+    public function testBeforeResultFalse()
+    {
+        $entity = new Article();
+        $policy = $this->getMockBuilder(BeforePolicyInterface::class)
+            ->setMethods(['before', 'canAdd'])
+            ->getMock();
+        $policy->expects($this->once())
+            ->method('before')
+            ->with($this->isInstanceOf(IdentityDecorator::class), $entity, 'add')
+            ->willReturn(new Result(false));
+        $policy->expects($this->never())
+            ->method('canAdd');
+        $resolver = new MapResolver([
+            Article::class => $policy
+        ]);
+        $service = new AuthorizationService($resolver);
+        $user = new IdentityDecorator($service, [
+            'role' => 'admin'
+        ]);
+        $result = $service->can($user, 'add', $entity);
+        $this->assertInstanceOf(ResultInterface::class, $result);
+        $this->assertFalse($result->getStatus());
     }
 
     public function testCallingMagicCallPolicy(): void

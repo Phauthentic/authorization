@@ -1,5 +1,5 @@
 <?php
-declare(strict_types = 1);
+declare(strict_types=1);
 /**
  * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
@@ -13,20 +13,22 @@ declare(strict_types = 1);
  * @since         1.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Phauthentic\Authorization;
+namespace Phauthentic\Authorization\Policy;
 
+use Phauthentic\Authorization\IdentityInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
 /**
- * This interface should be implemented by the authorization service provider.
+ * This interface should be implemented by your request policy class.
  */
-interface AuthorizationServiceProviderInterface
+interface RequestPolicyInterface
 {
     /**
-     * Returns authorization service instance.
+     * Method to check if the request can be accessed
      *
-     * @param \Psr\Http\Message\ServerRequestInterface $request Request
-     * @return \Phauthentic\Authorization\AuthorizationServiceInterface
+     * @param \Phauthentic\Authorization\IdentityInterface|null $identity Identity
+     * @param \Psr\Http\Message\ServerRequestInterface $request Server Request
+     * @return bool|\Phauthentic\Authorization\Policy\ResultInterface
      */
-    public function getAuthorizationService(ServerRequestInterface $request): AuthorizationServiceInterface;
+    public function canAccess(?IdentityInterface $identity, ServerRequestInterface $request);
 }

@@ -1,5 +1,5 @@
 <?php
-declare(strict_types = 1);
+declare(strict_types=1);
 /**
  * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
@@ -10,23 +10,27 @@ declare(strict_types = 1);
  *
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
  * @link          https://cakephp.org CakePHP(tm) Project
- * @since         1.0.0
+ * @since         1.1.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Phauthentic\Authorization;
-
-use Psr\Http\Message\ServerRequestInterface;
+namespace Phauthentic\Authorization\Policy;
 
 /**
- * This interface should be implemented by the authorization service provider.
+ * Policy check result interface
  */
-interface AuthorizationServiceProviderInterface
+interface ResultInterface
 {
     /**
-     * Returns authorization service instance.
+     * Returns policy check status.
      *
-     * @param \Psr\Http\Message\ServerRequestInterface $request Request
-     * @return \Phauthentic\Authorization\AuthorizationServiceInterface
+     * @return bool
      */
-    public function getAuthorizationService(ServerRequestInterface $request): AuthorizationServiceInterface;
+    public function getStatus(): bool;
+
+    /**
+     * Optional reason why policy check has failed.
+     *
+     * @return string|null
+     */
+    public function getReason(): ?string;
 }

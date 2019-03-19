@@ -15,33 +15,23 @@ declare(strict_types = 1);
  */
 namespace Authorization\Test\TestCase\Policy;
 
-use Phauthentic\Authorization\Policy\Exception\MissingPolicyException;
-use Phauthentic\Authorization\Policy\MapResolver;
-use Phauthentic\Authorization\Policy\ResolverCollection;
-use Phauthentic\Authorization\Policy\ResolverInterface;
-use Phauthentic\Authorization\Policy\StringResourceResolver;
+use Phauthentic\Authorization\Policy\Result;
 use PHPUnit\Framework\TestCase;
-use TestApp\Model\Entity\Article;
-use TestApp\Policy\ArticlePolicy;
 
 /**
- * ResolverCollectionTest
+ * Result TEst
  */
-class ResolverCollectionTest extends TestCase
+class ResultTest extends TestCase
 {
     /**
-     * testCount
+     * testGetPolicy
      *
      * @return void
      */
-    public function testCount(): void
+    public function testGetPolicy(): void
     {
-        $resolver = new ResolverCollection([
-            new MapResolver()
-        ]);
-        $this->assertCount(1, $resolver);
-
-        $resolver->add(new StringResourceResolver());
-        $this->assertCount(2, $resolver);
+        $result = new Result(false, 'Failed');
+        $this->assertFalse($result->getStatus());
+        $this->assertEquals('Failed', $result->getReason());
     }
 }

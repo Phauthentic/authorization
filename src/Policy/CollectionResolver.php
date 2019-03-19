@@ -68,6 +68,7 @@ class CollectionResolver implements ResolverInterface
             try {
                 return $resolver->getPolicy($resource);
             } catch (MissingPolicyException $e) {
+                // Ignore this case because we'll try the next resolver
             } catch (InvalidArgumentException $e) {
             }
         }

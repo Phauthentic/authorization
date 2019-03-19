@@ -35,7 +35,7 @@ class ForbiddenException extends Exception
     /**
      * Policy check result.
      *
-     * @var \ Phauthentic\Authorization\Policy\ResultInterface|null
+     * @var \Phauthentic\Authorization\Policy\ResultInterface|null
      */
     protected $result;
 

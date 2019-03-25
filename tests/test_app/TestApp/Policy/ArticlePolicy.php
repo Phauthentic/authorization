@@ -15,25 +15,25 @@ class ArticlePolicy
      */
     public function canAdd($user)
     {
-        return new Result(in_array($user['role'], ['admin', 'author']));
+        return in_array($user['role'], ['admin', 'author']);
     }
 
     public function canEdit($user, Article $article)
     {
         if (in_array($user['role'], ['admin', 'author'])) {
-            return new Result(true);
+            return true;
         }
 
-        return new Result($article->get('user_id') === $user['id']);
+        return $article->get('user_id') === $user['id'];
     }
 
     public function canModify($user, Article $article)
     {
         if (in_array($user['role'], ['admin', 'author'])) {
-            return new Result(true);
+            return true;
         }
 
-        return new Result($article->get('user_id') === $user['id']);
+        return $article->get('user_id') === $user['id'];
     }
 
     /**
@@ -46,10 +46,10 @@ class ArticlePolicy
     public function canDelete($user, Article $article)
     {
         if ($user['role'] === 'admin') {
-            return new Result(true);
+            return true;
         }
 
-        return new Result($user['id'] === $article->get('user_id'));
+        return $user['id'] === $article->get('user_id');
     }
 
     /**
@@ -78,10 +78,10 @@ class ArticlePolicy
     public function canView($user, Article $article)
     {
         if ($article->get('visibility') !== 'public' && empty($user)) {
-            return new Result(false);
+            return false;
         }
 
-        return new Result(true);
+        return true;
     }
 
     /**

@@ -23,7 +23,6 @@ use Phauthentic\Authorization\Policy\MapResolver;
 use Phauthentic\Authorization\Policy\Result;
 use Phauthentic\Authorization\Policy\ResultInterface;
 use PHPUnit\Framework\TestCase;
-use RuntimeException;
 use TestApp\Model\Entity\Article;
 use TestApp\Policy\ArticlePolicy;
 use TestApp\Policy\MagicCallPolicy;

@@ -84,7 +84,7 @@ class IdentityDecorator implements IdentityInterface
      */
     public function getOriginalData()
     {
-        if ($this->identity && method_exists($this->identity, 'getOriginalData')) {
+        if ($this->identity && is_object($this->identity) && method_exists($this->identity, 'getOriginalData')) {
             return $this->identity->getOriginalData();
         }
 

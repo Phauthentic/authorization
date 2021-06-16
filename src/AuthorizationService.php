@@ -18,6 +18,7 @@ namespace Phauthentic\Authorization;
 use Phauthentic\Authorization\Policy\BeforePolicyInterface;
 use Phauthentic\Authorization\Policy\Exception\MissingMethodException;
 use Phauthentic\Authorization\Policy\ResolverInterface;
+use Phauthentic\Authorization\Policy\Result;
 use Phauthentic\Authorization\Policy\ResultInterface;
 use RuntimeException;
 
@@ -61,14 +62,37 @@ class AuthorizationService implements AuthorizationServiceInterface
         if ($policy instanceof BeforePolicyInterface) {
             $result = $policy->before($user, $resource, $action);
 
-            if ($result !== null) {
+            if (is_bool($result)) {
+                return new Result($result);
+            }
+
+            if ($result instanceof ResultInterface) {
                 return $result;
+            }
+
+            if ($result !== null) {
+                throw new RuntimeException(sprintf(
+                    'Pre-authorization check must return instance of `%s`, `bool` or `null`.',
+                    ResultInterface::class
+                ));
             }
         }
 
         $handler = $this->getCanHandler($policy, $action);
+        $result = $handler($user, $resource);
 
-        return $handler($user, $resource);
+        if (is_bool($result)) {
+            return new Result($result);
+        }
+
+        if ($result instanceof ResultInterface) {
+            return $result;
+        }
+
+        throw new RuntimeException(sprintf(
+            'Policy action handler must return instance of `%s` or `bool`.',
+            ResultInterface::class
+        ));
     }
 
     /**

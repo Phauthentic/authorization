@@ -1,5 +1,5 @@
 <?php
-declare(strict_types = 1);
+
 /**
  * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
@@ -13,16 +13,15 @@ declare(strict_types = 1);
  * @since         1.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
+
+declare(strict_types=1);
+
 namespace Authorization\Test\TestCase\Policy;
 
-use Phauthentic\Authorization\Policy\Exception\MissingPolicyException;
 use Phauthentic\Authorization\Policy\MapResolver;
 use Phauthentic\Authorization\Policy\ResolverCollection;
-use Phauthentic\Authorization\Policy\ResolverInterface;
 use Phauthentic\Authorization\Policy\StringResourceResolver;
 use PHPUnit\Framework\TestCase;
-use TestApp\Model\Entity\Article;
-use TestApp\Policy\ArticlePolicy;
 
 /**
  * ResolverCollectionTest
@@ -40,7 +39,6 @@ class ResolverCollectionTest extends TestCase
             new MapResolver()
         ]);
         $this->assertCount(1, $resolver);
-
         $resolver->add(new StringResourceResolver());
         $this->assertCount(2, $resolver);
     }

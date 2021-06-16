@@ -1,4 +1,5 @@
 <?php
+
 namespace TestApp\Policy;
 
 use Phauthentic\Authorization\IdentityInterface;

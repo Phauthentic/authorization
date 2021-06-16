@@ -1,5 +1,5 @@
 <?php
-declare(strict_types = 1);
+
 /**
  * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
@@ -13,6 +13,9 @@ declare(strict_types = 1);
  * @since         1.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
+
+declare(strict_types=1);
+
 namespace Phauthentic\Authorization\Policy;
 
 use InvalidArgumentException;
@@ -45,16 +48,16 @@ class CollectionResolver implements ResolverInterface
     /**
      * Policy resolver instances.
      *
-     * @var \Phauthentic\Authorization\Policy\ResolverInterface[]
+     * @var \Phauthentic\Authorization\Policy\ResolverCollectionInterface
      */
     protected $collection;
 
     /**
      * Constructor. Takes an array of policy resolver instances.
      *
-     * @param \Phauthentic\Authorization\Policy\ResolverInterface[] $resolvers An array of policy resolver instances.
+     * @param \Phauthentic\Authorization\Policy\ResolverCollectionInterface $collection
      */
-    public function __construct(ResolverCollection $collection)
+    public function __construct(ResolverCollectionInterface $collection)
     {
         $this->collection = $collection;
     }

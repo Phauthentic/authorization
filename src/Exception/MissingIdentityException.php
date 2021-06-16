@@ -1,5 +1,5 @@
 <?php
-declare(strict_types = 1);
+
 /**
  * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
@@ -14,6 +14,8 @@ declare(strict_types = 1);
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
 
+declare(strict_types=1);
+
 namespace Phauthentic\Authorization\Exception;
 
 /**
@@ -22,12 +24,12 @@ namespace Phauthentic\Authorization\Exception;
 class MissingIdentityException extends Exception
 {
     /**
-     * {@inheritDoc}
+     * @var int
      */
-    protected $_defaultCode = 403;
+    protected $code = 403;
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     protected $messageTemplate = 'Identity is not present in `%s` request attribute.';
 }

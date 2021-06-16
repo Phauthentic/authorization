@@ -1,5 +1,5 @@
 <?php
-declare(strict_types = 1);
+
 /**
  * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
@@ -13,6 +13,9 @@ declare(strict_types = 1);
  * @since         1.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
+
+declare(strict_types=1);
+
 namespace Authorization\Test\TestCase\Policy;
 
 use Phauthentic\Authorization\Policy\Result;

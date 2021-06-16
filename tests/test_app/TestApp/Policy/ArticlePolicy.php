@@ -1,4 +1,5 @@
 <?php
+
 namespace TestApp\Policy;
 
 use Phauthentic\Authorization\Policy\Result;
@@ -62,7 +63,6 @@ class ArticlePolicy
     public function scopeIndex($user, Article $article)
     {
         $article->user_id = $user->getOriginalData()['id'];
-
         return $article;
     }
 

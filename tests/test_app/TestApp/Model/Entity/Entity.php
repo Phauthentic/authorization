@@ -1,11 +1,13 @@
 <?php
+
 namespace TestApp\Model\Entity;
 
 class Entity implements \ArrayAccess
 {
     protected $properties;
 
-    public function __construct(array $properties = []) {
+    public function __construct(array $properties = [])
+    {
         $this->properties = $properties;
     }
 

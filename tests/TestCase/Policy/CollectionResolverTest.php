@@ -1,5 +1,5 @@
 <?php
-declare(strict_types = 1);
+
 /**
  * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
@@ -13,13 +13,14 @@ declare(strict_types = 1);
  * @since         1.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
+
+declare(strict_types=1);
+
 namespace Authorization\Test\TestCase\Policy;
 
 use Phauthentic\Authorization\Policy\CollectionResolver;
-use Phauthentic\Authorization\Policy\Exception\MissingPolicyException;
 use Phauthentic\Authorization\Policy\MapResolver;
 use Phauthentic\Authorization\Policy\ResolverCollection;
-use Phauthentic\Authorization\Policy\ResolverInterface;
 use PHPUnit\Framework\TestCase;
 use TestApp\Model\Entity\Article;
 use TestApp\Policy\ArticlePolicy;
@@ -38,19 +39,15 @@ class CollectionResolverTest extends TestCase
     {
         $resource = new Article();
         $policy = new ArticlePolicy();
-
         $resolver1 = new MapResolver();
         $resolver2 = new MapResolver([
             Article::class => $policy
         ]);
-
         $collection = new ResolverCollection([
             $resolver1,
             $resolver2
         ]);
-
         $collectionResolver = new CollectionResolver($collection);
-
         $result = $collectionResolver->getPolicy($resource);
         $this->assertSame($policy, $result);
     }

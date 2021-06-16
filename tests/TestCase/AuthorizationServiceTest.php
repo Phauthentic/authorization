@@ -1,5 +1,5 @@
 <?php
-declare(strict_types = 1);
+
 /**
  * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
@@ -13,6 +13,9 @@ declare(strict_types = 1);
  * @since         1.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
+
+declare(strict_types=1);
+
 namespace Authorization\Test\TestCase;
 
 use Phauthentic\Authorization\AuthorizationService;
@@ -42,7 +45,7 @@ class AuthorizationServiceTest extends TestCase
 
         $user = null;
 
-        $result = $service->can($user, 'view', new Article);
+        $result = $service->can($user, 'view', new Article());
         $this->assertFalse($result->getStatus());
 
         $result = $service->can($user, 'view', new Article(['visibility' => 'public']));
@@ -61,7 +64,7 @@ class AuthorizationServiceTest extends TestCase
             'role' => 'admin'
         ]);
 
-        $result = $service->can($user, 'add', new Article);
+        $result = $service->can($user, 'add', new Article());
         $this->assertTrue($result->getStatus());
     }
 
@@ -75,7 +78,7 @@ class AuthorizationServiceTest extends TestCase
             'role' => 'admin'
         ]);
 
-        $result = $service->can($user, 'publish', new Article);
+        $result = $service->can($user, 'publish', new Article());
         $this->assertInstanceOf(ResultInterface::class, $result);
     }
 
@@ -91,7 +94,7 @@ class AuthorizationServiceTest extends TestCase
             'role' => 'admin'
         ]);
 
-        $service->can($user, 'add', new Article);
+        $service->can($user, 'add', new Article());
         $this->assertTrue($service->authorizationChecked());
     }
 
@@ -176,7 +179,7 @@ class AuthorizationServiceTest extends TestCase
             'role' => 'admin'
         ]);
 
-        $service->applyScope($user, 'index', new Article);
+        $service->applyScope($user, 'index', new Article());
         $this->assertTrue($service->authorizationChecked());
     }
 

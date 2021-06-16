@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace Authorization\Test;
 
@@ -56,7 +57,6 @@ class IdentityDecoratorTest extends TestCase
         $auth = $this->createMock(AuthorizationServiceInterface::class);
         $identity = new IdentityDecorator($auth, ['id' => 1]);
         $result = new Result(true);
-
         $auth->expects($this->once())
             ->method('can')
             ->with($identity, 'update', $resource)
@@ -70,7 +70,6 @@ class IdentityDecoratorTest extends TestCase
         $resource = new stdClass();
         $auth = $this->createMock(AuthorizationServiceInterface::class);
         $identity = new IdentityDecorator($auth, ['id' => 1]);
-
         $auth->expects($this->once())
             ->method('applyScope')
             ->with($identity, 'update', $resource)
@@ -101,14 +100,11 @@ class IdentityDecoratorTest extends TestCase
         $data = new ArrayObject(['id' => 1]);
         $auth = $this->createMock(AuthorizationServiceInterface::class);
         $identity = new IdentityDecorator($auth, $data);
-
         $this->assertTrue(isset($identity['id']));
         $this->assertFalse(isset($identity['nope']));
         $this->assertSame(1, $identity['id']);
-
         unset($identity['id']);
         $this->assertFalse(isset($identity['id']), 'Properties can be unset');
-
         $identity['id'] = 99;
         $this->assertSame(99, $identity['id'], 'Properties can be set.');
     }
@@ -135,10 +131,8 @@ class IdentityDecoratorTest extends TestCase
         $data = new Article(['id' => 2]);
         $auth = $this->createMock(AuthorizationServiceInterface::class);
         $identity = new IdentityDecorator($auth, $data);
-
         $this->assertTrue(isset($identity['id']));
         $this->assertSame($data['id'], $identity['id']);
-
         $this->assertFalse(isset($identity['unknown']));
         $this->assertNull($identity['unknown']);
     }

@@ -1,4 +1,5 @@
 <?php
+
 namespace TestApp\Authorization\Controller;
 
 class ArticlesController

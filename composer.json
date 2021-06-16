@@ -25,7 +25,7 @@
         "psr-4": {
             "Phauthentic\\Authorization\\": "src/"
         }
-    },IdentityDecorator
+    },
     "autoload-dev": {
         "psr-4": {
             "Phauthentic\\Authorization\\Test\\": "tests/",

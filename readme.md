@@ -3,6 +3,9 @@
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
 [![Scrutinizer Coverage](https://img.shields.io/scrutinizer/coverage/g/Phauthentic/authorization/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/Phauthentic/authorization/)
 [![Code Quality](https://img.shields.io/scrutinizer/g/Phauthentic/authorization/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/Phauthentic/authorization/)
+![phpstan Level 8](https://img.shields.io/badge/phpstan-Level%205-brightgreen?style=flat-square)
+![php 7.4](https://img.shields.io/badge/php-7.4-blue?style=flat-square)
+![php 8.0](https://img.shields.io/badge/php-8.0-blue?style=flat-square)
 
 A framework agnostic authorization library based on policies.
 

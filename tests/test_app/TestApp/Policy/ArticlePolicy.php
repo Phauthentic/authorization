@@ -1,6 +1,8 @@
 <?php
+
 namespace TestApp\Policy;
 
+use Phauthentic\Authorization\Policy\Result;
 use TestApp\Model\Entity\Article;
 
 class ArticlePolicy
@@ -14,25 +16,25 @@ class ArticlePolicy
      */
     public function canAdd($user)
     {
-        return in_array($user['role'], ['admin', 'author']);
+        return new Result(in_array($user['role'], ['admin', 'author']));
     }
 
     public function canEdit($user, Article $article)
     {
         if (in_array($user['role'], ['admin', 'author'])) {
-            return true;
+            return new Result(true);
         }
 
-        return $article->get('user_id') === $user['id'];
+        return new Result($article->get('user_id') === $user['id']);
     }
 
     public function canModify($user, Article $article)
     {
         if (in_array($user['role'], ['admin', 'author'])) {
-            return true;
+            return new Result(true);
         }
 
-        return $article->get('user_id') === $user['id'];
+        return new Result($article->get('user_id') === $user['id']);
     }
 
     /**
@@ -45,10 +47,10 @@ class ArticlePolicy
     public function canDelete($user, Article $article)
     {
         if ($user['role'] === 'admin') {
-            return true;
+            return new Result(true);
         }
 
-        return $user['id'] === $article->get('user_id');
+        return new Result($user['id'] === $article->get('user_id'));
     }
 
     /**
@@ -61,7 +63,6 @@ class ArticlePolicy
     public function scopeIndex($user, Article $article)
     {
         $article->user_id = $user->getOriginalData()['id'];
-
         return $article;
     }
 
@@ -77,9 +78,27 @@ class ArticlePolicy
     public function canView($user, Article $article)
     {
         if ($article->get('visibility') !== 'public' && empty($user)) {
-            return false;
+            return new Result(false);
         }
 
-        return true;
+        return new Result(true);
+    }
+
+    /**
+     * Testing that the article can be published
+     *
+     * This tests Result objects.
+     *
+     * @param \Authorization\IdentityInterface|null $user
+     * @param Article $article
+     * @return Result
+     */
+    public function canPublish($user, Article $article)
+    {
+        if ($article->get('visibility') === 'public') {
+            return new Result(false, 'public');
+        }
+
+        return new Result($article->get('user_id') === $user['id']);
     }
 }

@@ -1,5 +1,5 @@
 <?php
-declare(strict_types = 1);
+
 /**
  * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
@@ -13,6 +13,9 @@ declare(strict_types = 1);
  * @since         1.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
+
+declare(strict_types=1);
+
 namespace Phauthentic\Authorization\Policy;
 
 use ArrayIterator;
@@ -40,7 +43,7 @@ use Phauthentic\Authorization\Policy\Exception\MissingPolicyException;
  * $service = new AuthenticationService($collection);
  * ```
  */
-class ResolverCollection implements ResolverCollectionInterface
+class ResolverCollection implements ResolverInterface, ResolverCollectionInterface
 {
     /**
      * Policy resolver instances.
@@ -48,8 +51,7 @@ class ResolverCollection implements ResolverCollectionInterface
      * @var \Phauthentic\Authorization\Policy\ResolverInterface[]
      */
     protected $resolvers = [];
-
-    /**
+/**
      * Constructor. Takes an array of policy resolver instances.
      *
      * @param \Phauthentic\Authorization\Policy\ResolverInterface[] $resolvers An array of policy resolver instances.
@@ -70,7 +72,6 @@ class ResolverCollection implements ResolverCollectionInterface
     public function add(ResolverInterface $resolver): ResolverCollectionInterface
     {
         $this->resolvers[] = $resolver;
-
         return $this;
     }
 
@@ -90,5 +91,21 @@ class ResolverCollection implements ResolverCollectionInterface
     public function getIterator()
     {
         return new ArrayIterator($this->resolvers);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getPolicy($resource)
+    {
+        foreach ($this->resolvers as $resolver) {
+            try {
+                return $resolver->getPolicy($resource);
+            } catch (MissingPolicyException $e) {
+            }
+        }
+
+        $exception = new MissingPolicyException();
+        throw $exception->setMessageVars([get_class($resource)]);
     }
 }

@@ -17,7 +17,7 @@ packaged into a separate [authentication library](https://github.com/Phauthentic
 Install it via [Composer](http://getcomposer.org):
 
 ```
-composer require Phauthentic/authorization
+composer require phauthentic/authorization
 ```
 
 ## Documentation
@@ -25,7 +25,6 @@ composer require Phauthentic/authorization
  * [Quick Start and Introduction to the basics](docs/Quick-start-and-introduction.md)
  * [Policies](docs/Policies.md)
  * [Policy Resolver](docs/Policy-Resolvers.md)
- * [Middleware](docs/Middleware.md)
  * [Checking Authorization](docs/Checking-Authorization.md)
 
 ## Copyright & License

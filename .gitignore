@@ -1,10 +1,10 @@
 # User specific & automatically generated files #
 #################################################
 /composer.lock
-/phpunit.xml
-/phpcs.xml
 /tmp
 /vendor
+/bin
+/.phpunit.result.cache
 
 # OS generated files #
 ######################

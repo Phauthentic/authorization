@@ -1,5 +1,5 @@
 <?php
-declare(strict_types = 1);
+
 /**
  * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
@@ -13,11 +13,15 @@ declare(strict_types = 1);
  * @since         1.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
+
+declare(strict_types=1);
+
 namespace Phauthentic\Authorization;
 
 use ArrayAccess;
 use BadMethodCallException;
 use InvalidArgumentException;
+use Phauthentic\Authorization\Policy\ResultInterface;
 
 /**
  * An decorator implementing the IdentityInterface.
@@ -55,6 +59,7 @@ class IdentityDecorator implements IdentityInterface
         if (!is_array($identity) && !$identity instanceof ArrayAccess) {
             $type = is_object($identity) ? get_class($identity) : gettype($identity);
             $message = sprintf('Identity data must be an `array` or implement `ArrayAccess` interface, `%s` given.', $type);
+
             throw new InvalidArgumentException($message);
         }
 
@@ -65,7 +70,7 @@ class IdentityDecorator implements IdentityInterface
     /**
      * {@inheritDoc}
      */
-    public function can($action, $resource): bool
+    public function can($action, $resource): ResultInterface
     {
         return $this->authorization->can($this, $action, $resource);
     }
@@ -83,7 +88,7 @@ class IdentityDecorator implements IdentityInterface
      */
     public function getOriginalData()
     {
-        if ($this->identity && method_exists($this->identity, 'getOriginalData')) {
+        if ($this->identity && is_object($this->identity) && method_exists($this->identity, 'getOriginalData')) {
             return $this->identity->getOriginalData();
         }
 

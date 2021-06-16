@@ -1,5 +1,5 @@
 <?php
-declare(strict_types = 1);
+
 /**
  * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
@@ -13,9 +13,11 @@ declare(strict_types = 1);
  * @since         1.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
+
+declare(strict_types=1);
+
 namespace Phauthentic\Authorization;
 
-use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
 /**
@@ -23,13 +25,11 @@ use Psr\Http\Message\ServerRequestInterface;
  */
 interface AuthorizationServiceProviderInterface
 {
-
     /**
      * Returns authorization service instance.
      *
      * @param \Psr\Http\Message\ServerRequestInterface $request Request
-     * @param \Psr\Http\Message\ResponseInterface $response Response
      * @return \Phauthentic\Authorization\AuthorizationServiceInterface
      */
-    public function getAuthorizationService(ServerRequestInterface $request, ResponseInterface $response): AuthorizationServiceInterface;
+    public function getAuthorizationService(ServerRequestInterface $request): AuthorizationServiceInterface;
 }

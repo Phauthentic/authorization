@@ -1,4 +1,5 @@
 <?php
+
 namespace TestApp;
 
 use Phauthentic\Authorization\AuthorizationServiceInterface;

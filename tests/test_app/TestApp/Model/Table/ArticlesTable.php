@@ -1,4 +1,5 @@
 <?php
+
 namespace TestApp\Model\Table;
 
 use Phauthentic\Authorization\AuthorizationAwareInterface;

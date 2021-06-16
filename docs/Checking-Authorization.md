@@ -37,6 +37,3 @@ You can pass the `$user` into your models, services or templates allowing you to
 check authorization anywhere in your application easily. See the [identity
 decorator](./Middleware.md#identity-decorator) section for how to customize or
 replace the default decorator.
-
-The [AuthorizationComponent](./Component.md) can be used in controller actions
-to streamline authorization checks that raise exceptions on failure.

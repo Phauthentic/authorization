@@ -1,5 +1,5 @@
 <?php
-declare(strict_types = 1);
+
 /**
  * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
@@ -13,6 +13,9 @@ declare(strict_types = 1);
  * @since         1.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
+
+declare(strict_types=1);
+
 namespace Phauthentic\Authorization\Policy;
 
 use Phauthentic\Authorization\IdentityInterface;
@@ -32,7 +35,7 @@ interface BeforePolicyInterface
      * @param \Phauthentic\Authorization\IdentityInterface|null $identity Identity object.
      * @param mixed $resource The resource being operated on.
      * @param string $action The action/operation being performed.
-     * @return bool|null
+     * @return \Phauthentic\Authorization\Policy\ResultInterface|null
      */
-    public function before($identity, $resource, string $action): ?bool;
+    public function before(?IdentityInterface $identity, $resource, string $action): ?ResultInterface;
 }

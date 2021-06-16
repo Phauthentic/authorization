@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
@@ -12,6 +13,7 @@
  * @since         1.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace Phauthentic\Authorization\Policy;
 
 use Phauthentic\Authorization\Policy\Exception\MissingPolicyException;
@@ -100,7 +102,7 @@ class MapResolver implements ResolverInterface
     /**
      * Checks if the policy variable is of a valid type
      *
-     * @param string|object|callable
+     * @param string|object|callable $policy
      * @return void
      */
     protected function validatePolicyObject($policy): void

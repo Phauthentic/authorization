@@ -1,5 +1,5 @@
 <?php
-declare(strict_types = 1);
+
 /**
  * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
@@ -13,9 +13,13 @@ declare(strict_types = 1);
  * @since         1.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
+
+declare(strict_types=1);
+
 namespace Phauthentic\Authorization;
 
 use ArrayAccess;
+use Phauthentic\Authorization\Policy\ResultInterface;
 
 /**
  * Interface for describing identities that can have authorization checked.
@@ -31,9 +35,9 @@ interface IdentityInterface extends ArrayAccess
      *
      * @param string $action The action/operation being performed.
      * @param mixed $resource The resource being operated on.
-     * @return bool
+     * @return \Phauthentic\Authorization\Policy\ResultInterface
      */
-    public function can($action, $resource): bool;
+    public function can($action, $resource): ResultInterface;
 
     /**
      * Apply authorization scope conditions/restrictions.

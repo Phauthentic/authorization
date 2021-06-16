@@ -1,5 +1,8 @@
 <?php
+
 namespace TestApp\Policy;
+
+use Phauthentic\Authorization\Policy\Result;
 
 /**
  * For testing a policy that implements __call()
@@ -16,9 +19,9 @@ class MagicCallPolicy
     public function __call($name, $arguments)
     {
         if ($name === 'canDoThat') {
-            return true;
+            return new Result(true);
         }
 
-        return false;
+        return new Result(false);
     }
 }

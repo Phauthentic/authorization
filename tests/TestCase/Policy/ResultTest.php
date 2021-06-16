@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
@@ -12,25 +13,28 @@
  * @since         1.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Authorization\Test\TestCase\Middleware\UnauthorizedHandler;
 
-use Phauthentic\Authorization\Exception\Exception;
-use Phauthentic\Authorization\Middleware\UnauthorizedHandler\ExceptionHandler;
-use Cake\Http\Response;
-use Cake\Http\ServerRequest;
+declare(strict_types=1);
+
+namespace Authorization\Test\TestCase\Policy;
+
+use Phauthentic\Authorization\Policy\Result;
 use PHPUnit\Framework\TestCase;
 
-class ExceptionHandlerTest extends TestCase
+/**
+ * Result TEst
+ */
+class ResultTest extends TestCase
 {
-    public function testHandle()
+    /**
+     * testGetPolicy
+     *
+     * @return void
+     */
+    public function testGetPolicy(): void
     {
-        $handler = new ExceptionHandler();
-
-        $exception = new Exception();
-        $request = new ServerRequest();
-        $response = new Response();
-
-        $this->expectException(Exception::class);
-        $handler->handle($exception, $request, $response);
+        $result = new Result(false, 'Failed');
+        $this->assertFalse($result->getStatus());
+        $this->assertEquals('Failed', $result->getReason());
     }
 }

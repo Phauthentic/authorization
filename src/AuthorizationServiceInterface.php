@@ -1,5 +1,5 @@
 <?php
-declare(strict_types = 1);
+
 /**
  * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
@@ -13,7 +13,12 @@ declare(strict_types = 1);
  * @since         1.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
+
+declare(strict_types=1);
+
 namespace Phauthentic\Authorization;
+
+use Phauthentic\Authorization\Policy\ResultInterface;
 
 /**
  * Interface for Authorization service
@@ -29,9 +34,9 @@ interface AuthorizationServiceInterface
      * @param \Phauthentic\Authorization\IdentityInterface|null $user The user to check permissions for.
      * @param string $action The action/operation being performed.
      * @param mixed $resource The resource being operated on.
-     * @return bool
+     * @return \Phauthentic\Authorization\Policy\ResultInterface
      */
-    public function can($user, $action, $resource);
+    public function can(?IdentityInterface $user, string $action, $resource): ResultInterface;
 
     /**
      * Apply authorization scope conditions/restrictions.
@@ -46,17 +51,15 @@ interface AuthorizationServiceInterface
      * @param mixed $resource The resource being operated on.
      * @return mixed The modified resource.
      */
-    public function applyScope($user, $action, $resource);
-
-    /**
+    public function applyScope(?IdentityInterface $user, string $action, $resource);
+/**
      * Return a boolean based on whether or not this object
      * has had an authorization operation performed.
      *
      * @return bool
      */
     public function authorizationChecked(): bool;
-
-    /**
+/**
      * Allow for authorization to be skipped for this object.
      *
      * After calling this method the value of `authorizationChecked()` should

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
@@ -12,23 +13,25 @@
  * @since         1.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Phauthentic\Authorization\Middleware\UnauthorizedHandler;
 
-use Phauthentic\Authorization\Exception\Exception;
-use Psr\Http\Message\ResponseInterface;
+declare(strict_types=1);
+
+namespace Phauthentic\Authorization\Policy;
+
+use Phauthentic\Authorization\IdentityInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
 /**
- * This handler rethrows an exception caught by the middleware.
+ * This interface should be implemented by your request policy class.
  */
-class ExceptionHandler implements HandlerInterface
+interface RequestPolicyInterface
 {
-
     /**
-     * {@inheritDoc}
+     * Method to check if the request can be accessed
+     *
+     * @param \Phauthentic\Authorization\IdentityInterface|null $identity Identity
+     * @param \Psr\Http\Message\ServerRequestInterface $request Server Request
+     * @return \Phauthentic\Authorization\Policy\ResultInterface
      */
-    public function handle(Exception $exception, ServerRequestInterface $request, ResponseInterface $response, array $options = [])
-    {
-        throw $exception;
-    }
+    public function canAccess(?IdentityInterface $identity, ServerRequestInterface $request): ResultInterface;
 }

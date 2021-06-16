@@ -1,5 +1,5 @@
 <?php
-declare(strict_types = 1);
+
 /**
  * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
@@ -13,13 +13,21 @@ declare(strict_types = 1);
  * @since         1.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
+
+declare(strict_types=1);
+
 namespace Phauthentic\Authorization;
 
 use Phauthentic\Authorization\Policy\BeforePolicyInterface;
 use Phauthentic\Authorization\Policy\Exception\MissingMethodException;
 use Phauthentic\Authorization\Policy\ResolverInterface;
+use Phauthentic\Authorization\Policy\Result;
+use Phauthentic\Authorization\Policy\ResultInterface;
 use RuntimeException;
 
+/**
+ * Authorization Service
+ */
 class AuthorizationService implements AuthorizationServiceInterface
 {
     /**
@@ -49,37 +57,39 @@ class AuthorizationService implements AuthorizationServiceInterface
     /**
      * {@inheritDoc}
      */
-    public function can($user, $action, $resource)
+    public function can(?IdentityInterface $user, string $action, $resource): ResultInterface
     {
         $this->authorizationChecked = true;
         $policy = $this->resolver->getPolicy($resource);
-
         if ($policy instanceof BeforePolicyInterface) {
             $result = $policy->before($user, $resource, $action);
 
-            if (is_bool($result)) {
+            if ($result) {
                 return $result;
-            }
-            if ($result !== null) {
-                throw new RuntimeException('Pre-authorization check must return `bool` or `null`.');
             }
         }
 
         $handler = $this->getCanHandler($policy, $action);
         $result = $handler($user, $resource);
+        if (is_bool($result)) {
+            return new Result($result);
+        }
 
-        return $result === true;
+        if ($result instanceof ResultInterface) {
+            return $result;
+        }
+
+        throw new RuntimeException(sprintf('Policy action handler must return instance of `%s` or `bool`.', ResultInterface::class));
     }
 
     /**
      * {@inheritDoc}
      */
-    public function applyScope($user, $action, $resource)
+    public function applyScope(?IdentityInterface $user, string $action, $resource)
     {
         $this->authorizationChecked = true;
         $policy = $this->resolver->getPolicy($resource);
         $handler = $this->getScopeHandler($policy, $action);
-
         return $handler($user, $resource);
     }
 
@@ -91,10 +101,9 @@ class AuthorizationService implements AuthorizationServiceInterface
      * @return callable
      * @throws \Phauthentic\Authorization\Policy\Exception\MissingMethodException
      */
-    protected function getCanHandler($policy, $action)
+    protected function getCanHandler($policy, $action): callable
     {
         $method = 'can' . ucfirst($action);
-
         if (!method_exists($policy, $method) && !method_exists($policy, '__call')) {
             throw (new MissingMethodException())->setMessageVars([$method, $action, get_class($policy)]);
         }
@@ -113,7 +122,6 @@ class AuthorizationService implements AuthorizationServiceInterface
     protected function getScopeHandler($policy, $action): callable
     {
         $method = 'scope' . ucfirst($action);
-
         if (!method_exists($policy, $method)) {
             throw (new MissingMethodException())->setMessageVars([$method, $action, get_class($policy)]);
         }
@@ -135,7 +143,6 @@ class AuthorizationService implements AuthorizationServiceInterface
     public function skipAuthorization(): AuthorizationServiceInterface
     {
         $this->authorizationChecked = true;
-
         return $this;
     }
 }

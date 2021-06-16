@@ -10,32 +10,29 @@
  *
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
  * @link          https://cakephp.org CakePHP(tm) Project
- * @since         1.0.0
+ * @since         1.1.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
 
 declare(strict_types=1);
 
-namespace Authorization\Test\TestCase\Policy;
-
-use Phauthentic\Authorization\Policy\StringResourceResolver;
-use PHPUnit\Framework\TestCase;
-use TestApp\Policy\ArticlePolicy;
+namespace Phauthentic\Authorization\Policy;
 
 /**
- * String Resource Resolver Test
+ * Policy check result interface
  */
-class StringResourceResolverTest extends TestCase
+interface ResultInterface
 {
     /**
-     * testGetPolicy
+     * Returns policy check status.
      *
-     * @return void
+     * @return bool
      */
-    public function testGetPolicy(): void
-    {
-        $resolver = new StringResourceResolver();
-        $result = $resolver->getPolicy(ArticlePolicy::class);
-        $this->assertInstanceOf(ArticlePolicy::class, $result);
-    }
+    public function getStatus(): bool;
+/**
+     * Optional reason why policy check has failed.
+     *
+     * @return string|null
+     */
+    public function getReason(): ?string;
 }

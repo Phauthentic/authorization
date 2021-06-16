@@ -16,7 +16,7 @@
     "require-dev": {
         "misantron/dbunit": "dev-master",
         "phpstan/phpstan": "^0.12.84",
-        "phpunit/phpunit": "^9.5.4",
+        "phpunit/phpunit": "^9.5.4|^8.5.16|^7.5.20",
         "squizlabs/php_codesniffer": "^3.4"
     },
     "license": "MIT",
